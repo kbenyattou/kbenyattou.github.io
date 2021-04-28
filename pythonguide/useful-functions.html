@@ -4,8 +4,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Useful Functions</title>
         <link href="../main.css" rel="stylesheet" type="text/css">
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [['$','$'], ['\\(','\\)']],
+                    processEscapes: true
+                    }
+                });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     </head>
 
     <body>
@@ -36,7 +43,7 @@
 
 <h2>Multiple Conditions</h2>
 
-<p>In the case that I'd like to check that an object satisfies several conditions, using logical operators like `and` or `or` becomes unwieldly above 3 or 4 conditions. This is where the `all()` and `any()` functions come in handy.</p>
+<p>In the case that I'd like to check that an object satisfies several conditions, using logical operators like <code>and</code> or <code>or</code> becomes unwieldly above 3 or 4 conditions. This is where the <code>all()</code> and <code>any()</code> functions come in handy.</p>
 
 <ul>
     <li><code>all(iterable)</code> returns True if all items in your iterable are True</li>
@@ -51,27 +58,25 @@ e.g. <code>any([0,0,1])</code> returns True.<br>
 
 <h2>List Comprehensions</h2>
 
-<p>List comprehensions condense a lot of syntax in a fairly easy-to-read expression to create a list of objects. The disadvantage is that it doesn't translate well into other languages. A typical list comprehension looks something like:</p>
+<p>List comprehensions condense a lot of syntax in a fairly easy-to-read expression to create a list of objects. The disadvantage is that it doesn't translate well into other languages. A typical list comprehension looks like:</p>
 
-<pre>
-[expression for variable in iterable if conditions]
-</pre>
+<p>
+    <code>
+    [expression for variable in iterable if conditions]
+    </code>
+</p>
 
 <p>Using functions, we can emulate a list comprehension as <code>list(map(expression, filter(condition, iterable)))</code>. We need to use <code>list()</code> on the object created by <code>map()</code> because it's an iterator (an object representating a stream of data, returning the data one element at a time), not an iterable.</p>
 
 <details><summary>Example</summary>
 
-<pre>
-example_list = [n**2 for n in range(1,5) if n%2 == 0]
-print(example_list)
-> [4,16]
-</pre>
+<p><code>example_list = [n**2 for n in range(1,5) if n%2 == 0]</code></p>
 
 <p>What this particular list comprehension does is:</p>
 <ol>
-    <li>Creates the list <code>[1,2,3,4]</code>.</li>
-    <li>The <code>filter</code> function creates an iterator whose elements satisfy the condition that the element is divisible by $2$, leaving $2$ and $4$.</li>
-    <li>It then applies the function $n \mapsto n^2$ to each element of the iterator and creates a list out of them.</li>
+    <p><li>Creates the list <code>[1,2,3,4]</code>.</li></p>
+    <p><li>The <code>filter</code> function creates an iterator whose elements satisfy the condition that the element is divisible by $2$, leaving $2$ and $4$.</li></p>
+    <p><li>It then applies the function $n \mapsto n^2$ to each element of the iterator and creates a list out of them.</li></p>
 </ol>
 </details>
 

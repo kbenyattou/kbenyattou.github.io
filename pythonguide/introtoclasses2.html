@@ -1,0 +1,187 @@
+<!doctype html>
+<html class="flexible" style="background: #99c277">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Attributes and Methods</title>
+        <link href="../main.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Attributes and Methods</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../math.html">Math</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropbtn"><a href="../python.html"><strong>Python</strong></a></a>
+                                <div class="dropdown-content">
+                                  <a href="python-basics.html">Basics</a>
+                                  <a href="useful-functions.html">Useful Functions</a>
+                                  <a href="introtoclasses1.html">Intro to Classes</a>
+                                  <a href="introtoclasses2.html"><strong>Attributes and Methods</strong></a>
+                                  <a href="introtoclasses3.html">Special Methods</a>
+                                  <a href="introtoclasses4.html">Inheritance</a>
+                                </div>
+                        </div>
+                    </li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../notes.html">Notes</a></li>
+                </ul>
+            </nav>
+        </header>
+
+<h2>Methods</h2>
+
+<p>Methods are functions that are defined as part of a class. There are three types: instance, class and static methods. To distinguish between these methods, we ask three questions:</p>
+
+<ul>
+    <li>Are there any arguments automatically passed to the method?</li>
+    <li>Can the method modify the instance's state?</li>
+    <li>Can the method modify the class' state?</li>
+</ul>
+
+<p><table align="center" cellpadding="5" cellspacing="0">
+    <tr>
+        <td>Method Type</td>
+        <td>Passed by Default</td>
+        <td>Modify Instance</td>
+        <td>Modify Class</td>
+    </tr>
+    <tr>
+        <td>Instance</td>
+        <td><code>self</code></td>
+        <td>y</td>
+        <td>y</td>
+    </tr>
+    <tr>
+        <td>Instance</td>
+        <td><code>cls</code></td>
+        <td>y</td>
+        <td>n</td>
+    </tr>
+    <tr>
+        <td>Static</td>
+        <td>n/a</td>
+        <td>n</td>
+        <td>n</td>
+    </tr>
+</table>
+</p>
+
+---
+
+<h2>Instance Methods</h2>
+
+<p>Instance methods can only be called once an object has been created. During instantiation, a number of methods are automatically called in order to prepare the object being created. Such methods are a particular type of instance method called constructors.</p>
+
+<h3>The <code>__init__</code> Method</h3>
+
+<p>An example of a constructor in Python is the <code>__init__</code> method (short for initialise).</p>
+
+<pre>
+class Car:
+    def __init__(self, model, mileage):
+        self._model = model
+        self._mileage = mileage
+</pre>
+
+<p>Notice the argument called <code>self</code>. This argument must always be included in the definition of an instance method. <code>self</code> refers to the object calling the method. After <code>self</code> we can specify any extra arguments we'd like the method to accept.</p>
+
+<p>Regular instance methods are defined similarly e.g.</p>
+
+<pre>
+def increase_mileage(self):
+    self._mileage += 1
+</pre>
+
+<p>Once an instance has been initialised, e.g. with <code>Corola = Car('Toyota',1000)</code>, one can call an instance method in two ways:</p>
+
+<pre>
+Corola.increase_mileage()
+Car.increase_mileage(Corola)
+</pre>
+
+---
+
+<h2>Class Variables</h2>
+
+<p>We saw earlier that instance variables are different for each instance. Class variables are shared between all instances of a class.</p>
+
+<pre>
+class Car:
+    class_message = 'This is a car.'
+</pre>
+
+<p>Class variables are accessed either through the class itself e.g. <code>Car.class_message</code> or through an instance of the class e.g. <code>self.class_message</code>.</p>
+
+<p>Note: If we try to access an attribute of an instance, Python will first check to see if the instance contains that particular attribute. If it doesn't, then Python will check for the attribute in any classes from which the instance inherits.</p>
+
+<h3>Example</h3>
+
+<p>Say you wanted to create a number that updates itself every time a new object is created. We can achieve this by updating a class variable every time the <code>__init__</code> method is called.</p>
+
+<pre>
+class Car:
+    number_of_cars = 0
+
+    def __init__(self):
+        ...
+        Car.number_of_cars += 1
+</pre>
+
+<p>If we want to override a <code>classvariable</code> for a particular instance, we can use <code>self.classvariable =</code> to update it.</p>
+
+---
+
+<h2>Class Methods</h2>
+
+<p>Instance methods in a class automatically pass an instance as their first argument. Class methods automatically pass their parent class. How do we make the first input the class instead? Simply add the decorator <code>@classmethod</code> above the method.</p>
+
+<pre>
+class Car:
+    def __init__(self, model, mileage):
+        self._model = model
+        self._mileage = mileage
+
+    @classmethod
+    def class_method(cls, variable):
+        cls.first = variable
+</pre>
+
+<p>We conventionally refer to the class as <code>cls</code> because the name <code>class</code> is a keyword that's already reserved Python (for creating a class). Running a class method means that you work with the class instead of a particular instance.</p>
+
+<h3>Example</h3>
+    
+<p>Class methods can be used as alternative constructors. Let's say we'd like to create an instance using properties encoded in a string e.g. given a string <code>merc_information = 'Mercedes-1400'</code>, let's say we'd like to create an instance of the <code>Car</code> class with the parameters <code>model</code> and </code>mileage</code>. We could manually parse the string and create an instance.</p>
+    
+<p>Alternatively, we can create a class method that parses a string and returns an instance of the class with the string's properties:</p>
+    
+<pre>
+@classmethod
+def from_string(cls, inst_string):
+    model, mileage = inst_string.split('-')
+    return cls(model, mileage)
+    
+Mercedes = Car.from_string(merc_information)
+</pre>
+    
+<p>We conventionally use `from` in the name of such class methods.</p>
+
+---
+
+<h2>Static Methods</h2>
+
+<p>Unlike class (<code>cls</code>) and instance (<code>self</code>) methods, static methods don't pass anything automatically.</p>
+
+<p>Static methods are useful when you want to define a function that doesn't depend on any particular instance or class variable but does have some logical connection to the class. To create a static method, use the decorator <code>@staticmethod</code>.</p>
+
+<pre>
+@staticmethod
+def static_method(first, second):
+    ...
+</pre>
+
+    </body>
+</html>

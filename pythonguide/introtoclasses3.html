@@ -1,0 +1,85 @@
+<!doctype html>
+<html class="flexible" style="background: #99c277">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Special Methods</title>
+        <link href="../main.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Special Methods</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../math.html">Math</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropbtn"><a href="../python.html"><strong>Python</strong></a></a>
+                                <div class="dropdown-content">
+                                  <a href="python-basics.html">Basics</a>
+                                  <a href="useful-functions.html">Useful Functions</a>
+                                  <a href="introtoclasses1.html">Intro to Classes</a>
+                                  <a href="introtoclasses2.html">Attributes and Methods</a>
+                                  <a href="introtoclasses3.html"><strong>Special Methods</strong></a>
+                                  <a href="introtoclasses4.html">Inheritance</a>
+                                </div>
+                        </div>
+                    </li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../notes.html">Notes</a></li>
+                </ul>
+            </nav>
+        </header>
+
+<h2>Dunder Methods</h2>
+
+<p>When a method name is surrounded by <u>d</u>ouble <u>under</u>scores, we call it a <u>dunder</u> method. These methods are also called special or magic methods. We've already seen the <code>__init__</code> method which is an example of a dunder method.</p>
+
+Two other commonly used dunder methods are:
+- <code>__repr__</code> returns an unambiguous representation of the object.
+- <code>__str__</code> returns a more user friendly representation of the object.
+
+<p>Such methods define how objects are printed and displayed e.g.</p>
+
+<pre>
+import datetime
+today = datetime.date.today()
+str(today)
+> '2020-09-01'
+repr(today)
+> 'datetime.date(2020, 9, 1)'
+</pre>
+
+<p>We can define our own <code>__repr__</code> to return a string that we can use to recreate an object in the same way as the <code>__init__</code> method.</p>
+
+---
+
+<h2>Familiar Dunder Methods</h2>
+
+<p>There are some common dunder methods that work in the background of basic code. For example, when adding two objects together a special method called <code>__add__</code> is called on the objects:</p>
+
+<ul>
+    <li>For integers, <code>1+2</code> returns 3 but under the bonnet we have an <code>__add__</code> method called on the integer object via <code>int.__add__(1,2)</code>.</li>
+    <li>The same goes for string concatenation. In this case, <code>str.__add__('a', 'b')</code> returns the string <code>'ab'</code>.</li>
+</ul>
+
+<p>We can customise how addition works for custom objects by defining our very own add dunder method within the class.</p>
+
+<pre>
+class People:
+    def __init__(self, givenName):
+        self.name = givenName
+
+    def __add__(self, other):
+        return self.name + ' and ' + other.name
+</pre>
+
+<p>This particular dunder add method takes in two instances <code>self</code> and <code>other</code>, and outputs their names together.</p>
+
+<p>There are many examples of dunder methods in the <a href="https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types">standard library</a>.</p>
+
+<p>The <code>len</code> method is one such example and typing something like <code>len('test')</code> returns <code>4</code> and what's going on behind the scenes is that <code>__len__</code> is being called on the <code>str</code> object <code>'test'</code>.</p>
+
+    </body>
+</html>

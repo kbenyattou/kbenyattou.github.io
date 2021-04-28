@@ -1,0 +1,94 @@
+<!doctype html>
+<html class="flexible" style="background: #99c277">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Intro to Classes</title>
+        <link href="../main.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Introduction to Classes</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../math.html">Math</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropbtn"><a href="../python.html"><strong>Python</strong></a></a>
+                                <div class="dropdown-content">
+                                  <a href="python-basics.html">Basics</a>
+                                  <a href="useful-functions.html">Useful Functions</a>
+                                  <a href="introtoclasses1.html"><strong>Intro to Classes</strong></a>
+                                  <a href="introtoclasses2.html">Attributes and Methods</a>
+                                  <a href="introtoclasses3.html">Special Methods</a>
+                                  <a href="introtoclasses4.html">Inheritance</a>
+                                </div>
+                        </div>
+                    </li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../notes.html">Notes</a></li>
+                </ul>
+            </nav>
+        </header>
+
+<h2>What is a Class?</h2>
+
+<p>If we were limited to strings, numbers and booleans, we'd have a tough time trying to model objects we see in the real world. To this end, we can write blocks of code that serve as blueprints for creating new data types. These blueprints are known as classes.</p>
+
+<p>Classes are just specifications. We can't use classes themselves in our programs. Instead, we use classes to create objects (also known as instances). We use the word 'instantiate' to refer to the process by which an object is created from a class. By analogy with car manufacturing:</p>
+
+<ul>
+    <li>the class would be the design blueprints for a type of car,</li>
+    <li>the instantiation/creation step would be the building process,</li>
+    <li>and the object is the end-result, a car.</li>
+</ul>
+
+<p>Classes allow us to logically group data and functions in a way that's easy to re-use and build upon. This is part of the reason why they're useful.</p>
+
+---
+
+<h2>Creating and Instantiating Classes</h2>
+
+<p>We can create an empty class (without attributes and methods) by writing the following code. (Note that we conventionally capitalise class names so they are easy to identify.)</p>
+
+<pre>
+class ClassName:
+    pass
+</pre>
+
+<p>To instantiate a class, we pass it as a variable. The syntax is reminiscent of a function call. (We can also pass instances into functions and do pretty much everything else we can do with basic data types. More on this later.)</p>
+
+<p>Below we instantiate the same class twice.</p>
+
+<pre>
+instance1 = ClassName()
+instance2 = ClassName()
+</pre>
+
+<p>Each instance created from a class is unique. For example, both instances above have different locations in system memory. Continuing the car analogy, if two identical cars are created from the same class, they are different objects despite being identically designed and built.</p>
+
+---
+
+<h2>Attributes</h2>
+
+<p>Naturally, we'd like to imbue our objects with information that describes them. To this end, we can create variables that are particular to an object. Attributes refer to variables associated with a class.</p>
+
+<h3>Instance Variables</h3>
+
+A great benefit of using classes is that each instance of a class can hold different kinds of data. This data is referred to as an instance variable. We can define instance variables as follows:
+
+<pre>
+instance1.name = 'First Last'
+instance1.height = 170
+instance1.weight = 60
+</pre>
+
+<p>This process would be quite laborious if we have many instances. To this end, we can use what is known in object oriented programming as a constructor. A constructor is an example of a <u>function associated with a class</u>. Such functions are called <u>methods</u>.</p>
+
+---
+
+<p>We'll discuss these in the next section.</p>
+
+    </body>
+</html>

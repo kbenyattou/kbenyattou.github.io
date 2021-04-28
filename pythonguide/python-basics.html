@@ -1,0 +1,81 @@
+<!doctype html>
+<html class="flexible" style="background: #99c277">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Python Basics</title>
+        <link href="../main.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Python Basics</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../math.html">Math</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropbtn"><a href="../python.html"><strong>Python</strong></a></a>
+                                <div class="dropdown-content">
+                                  <a href="python-basics.html"><strong>Basics</strong></a>
+                                  <a href="useful-functions.html">Useful Functions</a>
+                                  <a href="introtoclasses1.html">Intro to Classes</a>
+                                  <a href="introtoclasses2.html">Attributes and Methods</a>
+                                  <a href="introtoclasses3.html">Special Methods</a>
+                                  <a href="introtoclasses4.html">Inheritance</a>
+                                </div>
+                        </div>
+                    </li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../notes.html">Notes</a></li>
+                </ul>
+            </nav>
+        </header>
+
+<h2>Everything in Python is an Object</h2>
+
+<p>Python is an object-oriented language. We'll formally define objects later but what this means is that everything in Python is an object: strings, integers, functions etc. Every object in python has an identity, type and value.</p>
+
+<h3>Identity</h3>
+
+<p>The identity of an object is the unique identifier for an object and is used by Python to retrieve the object. We can return the identity of an object with <code>id()</code>. Once created, the identity of an object never changes.</p>
+
+<h3>Type</h3>
+
+<p>The type of an object determines the operations that the object supports and defines the possible values for objects of said type. We can return the type of an object with <code>type()</code>. Once created, the type of an object also never changes.</p>
+
+<h3>Value</h3>
+
+<p>The value of some objects can change. This partitions objects into two groups: mutable and immutable.</p>
+
+---
+
+<h2>Mutable and Immutable</h2>
+
+<p>An immutable object's value cannot be changed after it's created. Attempting to modify an immutable object's value will result in a copy being created.</p>
+
+<p>Mutable objects' values can be changed after creation.</p>
+
+<table align="center" cellpadding="5" cellspacing="0">
+    <tr>
+        <td>Object Type</td>
+        <td>Examples</td>
+    </tr>
+    <tr>
+        <td>Immutable</td>
+        <td><code>bool</code> <code>int</code> <code>float</code> <code>tuple</code> <code>str</code></td>
+    </tr>
+    <tr>
+        <td>Mutable</td>
+        <td><code>list</code> <code>dict</code> <code>set</code>
+    </tr>
+</table>
+
+---
+
+<h2>Variable Assignment</h2>
+
+<p>Variables are the primary way to store and refer to data in Python. We create variables in Python by putting a name to the left of an <code>=</code> sign and a value on the right e.g. <code>x = 10</code>. Variables in Python work fundamentally differently to other programming languages. Here's a fantastic post on <a href="https://realpython.com/pointers-in-python/">variables in Python and C and how to simulate pointers in Python</a>.</p>
+
+    </body>
+</html>

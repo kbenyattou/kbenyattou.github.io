@@ -1,0 +1,135 @@
+<!doctype html>
+<html class="flexible">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mathematics</title>
+        <link href="main.css" rel="stylesheet" type="text/css">
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1>Mathematics</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="math.html"><strong>Math</strong></a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropbtn"><a href="python.html">Python</a></a>
+                                <div class="dropdown-content">
+                                  <a href="pythonguide/python-basics.html">Basics</a>
+                                  <a href="pythonguide/useful-functions.html">Useful Functions</a>
+                                  <a href="pythonguide/introtoclasses1.html">Intro to Classes</a>
+                                  <a href="pythonguide/introtoclasses2.html">Attributes and Methods</a>
+                                  <a href="pythonguide/introtoclasses3.html">Special Methods</a>
+                                  <a href="pythonguide/introtoclasses4.html">Inheritance</a>
+                                </div>
+                        </div>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="notes.html">Notes</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <p>This section includes some of the more useful tricks I've learned in my time discussing maths with friends. There's also a section for sets of notes I made at university.</p>
+
+        <p><details><summary markdown="span"><strong>Reflection Across a Midpoint</strong></summary>
+
+        <p>One of my favourite tools to use when I see a tricky integral is slightly unconventional and involves reflecting the function in question about the midpoint of the given interval of integration. More precisely, say $f$ is an integrable function over $[a,b]$. Then, via the substitution $x \mapsto a+b-x$:</p>
+
+        $$ \int_{a}^{b} f(x) \text{ d}x = \int_{a}^{b} f(a+b-x) \text{ d}x. $$
+
+        <p>This is illustrated in the image below. Since the graph is simply a reflection over the midpoint, the area (and thus integral) does not change:</p>
+
+        <div align="center"><img src="assets/images/integrate.svg"></div>
+
+        <p><details><summary markdown="span">Example</summary>
+        <br> Let $n \in \mathbb{N}$ and calculate the following integral:
+
+        $$ I = \int_{0}^{\pi/2} \dfrac{\cos^{n}(x)}{\cos^{n}(x)+\sin^{n}(x)} \text{ d}x $$
+
+        Using the substitution $x \mapsto a+b-x = \pi/2 - x$, our integral transforms to:
+
+        $$ I = \int_{0}^{\pi/2} \dfrac{\sin^{n}(x)}{\sin^{n}(x)+\cos^{n}(x)} \text{ d}x $$
+
+        Adding the two together gives:
+
+        $$ 2I = \int_{0}^{\pi/2} \dfrac{\sin^{n}(x)+\cos^{n}(x)}{\sin^{n}(x)+\cos^{n}(x)} \text{ d}x = \int_{0}^{\pi/2} \text{d}x. $$
+
+        Thus, our seemingly complicated integral is equal to $\pi/4$.
+
+        <div align="right">
+        $ \blacksquare $
+        </div>
+
+        </details></p>
+        </details></p>
+
+        <p><details><summary><strong>Weierstrass Substitution</strong></summary>
+
+        <p>If I'm ever given an integral of a rational expression of trigonometric functions and all my initial attempts fail, my fall-back is usually to transform the problem into one of rational expressions of polynomials. To do so, one can invoke the Weierstrass substitution $t = \tan(\theta/2)$:</p>
+
+        <div align="center"><img src="assets/images/weierstrass.svg" alt="" height="150" style="opacity: 1"></div>
+
+        <p>The right-angled triangle above and appropriate double-angle formulae can be used to express trigonometric terms as functions of $t$ and the differential form transforms according to the following rule:</p>
+
+        $$ \text{d}\theta = \dfrac{1}{1+t^2} \text{ d}t. $$
+
+        These kinds of integrals usually boil down to a partial fraction decomposition of some kind.
+        
+        </details></p>
+
+        <p><details><summary><strong>Differentiating Under the Integral Sign</strong></summary>
+
+        <p>The next integral serves as an example of two methods of integration.</p>
+
+        $$ J = \int_{0}^{\infty} \dfrac{e^{3x} - e^{x}}{x(e^{3x}+1)(e^{x}+1)} \text{ d}x $$
+
+        <p>We'll begin with explaining a method popularised by Richard Feynman:</p>
+
+        <p>By introducing an extra parameter into an integral, under certain conditions, it's possible to solve the currently intractable integral as a special case of a more general problem.</p>
+
+        <p><details><summary>Theorem (Interchanging Derivative & Integral)</summary>
+        <p>Let $(X,\mu)$ be a measurable space, $a < b$ with $a, b \in \overline{\mathbb{R}}$ and $f \colon (a,b) \times X \to \overline{\mathbb{R}}$ be such that</p>
+
+            <ol>
+                <li>$f(t,\cdot)$ is measurable and $F(t) = \int f(t,x) \text{d}\mu(x)$ is finite for each $t \in (a,b)$</li>
+                <li>$\exists \mu$-integrable $g \colon X \to \overline{\mathbb{R}}$ such that for each $t \in (a,b)$ and for $\mu$-almost everywhere $x \in X$, the derivative $\partial f(t,x)/\partial t$ exists and $\| \partial f(t,x)/\partial t \| \leqslant g(x)$.</li>
+            </ol>
+
+        Then $F$ is differentiable on $(a,b)$ and $$ \displaystyle F'(t) = \int \dfrac{\partial f(t,x)}{\partial t} \text{ d}\mu(x). $$
+        <div align="right">
+        $ \blacksquare $
+        </div>
+        </details></p>
+
+        <p>What this theorem essentially says is that if all your functions are 'nice enough' and the partial derivative of $f$ w.r.t. $t$ is bounded (aka the growth of the function as $t$ changes is also well-behaved), then we can interchange our integral and derivative. To see it in practice, let's consider a more general version of $J$:</p>
+
+        $$ J(t) = \int_{0}^{\infty} \underbrace{\dfrac{e^{tx} - e^{x}}{x(e^{tx}+1)(e^{x}+1)}}_{f(t,x)} \text{ d}x $$
+
+        <p>For me, the guess of $f(t,x)$ is usually educated by whether I can cancel terms out after taking a partial derivative. To that end:</p>
+
+        <p><div align="center">\begin{aligned} J'(t) & = \int_{0}^{\infty} \dfrac{\partial f(t,x)}{\partial t} \text{ d}x \\\ & = \int_{0}^{\infty} \dfrac{e^{tx}}{(e^{tx}+1)^2} \text{ d}x \\\ & = - \dfrac{1}{t} \dfrac{1}{e^{tx}+1} \Big\|_{0}^{\infty} = \dfrac{1}{2t} \ \implies J(t) = \dfrac{1}{2} \log(t) + C. \end{aligned}</div></p>
+
+        <p>Noticing that $J(1) = 0$ means that our constant of integration is $0$. Now, substituting in $t = 3$ returns our original integral.</p>
+
+        $$ \therefore \ J(3) = \int_{0}^{\infty} \dfrac{e^{3x} - e^{x}}{x(e^{3x}+1)(e^{x}+1)} \text{ d}x = \dfrac{1}{2} \log(3). $$
+
+        </details></p>
+
+        <p><details><summary><strong>Double Integrals</strong></summary>
+
+        <p>When doing multivariable calculus, sometimes we'd like to swap the order of integration. We are justified in doing so with the help of <a href="https://en.wikipedia.org/wiki/Fubini%27s_theorem">a theorem proved by Fubini</a>. We can use our previous integral $J$ to see this in action.</p>
+
+        <p>I'll use $\leftrightarrow$ to denote the equality where the order of integration is swapped and $\text{FTC}$ is where we invoke the Fundamental Theorem of Calculus:</p>
+
+        <div align="center"> \begin{aligned} J & = \int_{0}^{\infty} \dfrac{e^{3x} - e^{x}}{x(e^{3x}+1)(e^{x}+1)} \text{ d}x \\\ & = - \int_{0}^{\infty} \left( \dfrac{1}{x(e^{3x}+1)} - \dfrac{1}{x(e^{x}+1)} \right) \text{ d}x \\\ & \overset{\text{FTC}}= - \int_{0}^{\infty} \int_{1}^{3} \dfrac{\text{d}}{\text{d}y} \dfrac{1}{x(e^{yx}+1)} \text{ d}y \text{ d}x \\\ & \overset{\leftrightarrow}= - \int_{1}^{3} \int_{0}^{\infty} \dfrac{\text{d}}{\text{d}y} \dfrac{1}{x(e^{yx}+1)} \text{ d}x \text{ d}y \\\ & = \int_{1}^{3} \int_{0}^{\infty} \dfrac{e^{yx}}{(e^{yx}+1)^{2}} \text{ d}x \text{ d}y \\\ & = \dfrac{1}{2} \int_{1}^{3} \dfrac{1}{y} \text{ d}y \\\ & = \dfrac{1}{2} \log(3) \end{aligned}</div>
+        
+        <p>Two methods for the price of one integral. 👏🏼</p>
+        </details></p>
+        
+    </body>
+</html>

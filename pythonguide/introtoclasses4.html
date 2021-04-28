@@ -1,0 +1,87 @@
+<!doctype html>
+<html class="flexible" style="background: #99c277">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Inheritance</title>
+        <link href="../main.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Inheritance</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../math.html">Math</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropbtn"><a href="../python.html"><strong>Python</strong></a></a>
+                                <div class="dropdown-content">
+                                  <a href="python-basics.html">Basics</a>
+                                  <a href="useful-functions.html">Useful Functions</a>
+                                  <a href="introtoclasses1.html">Intro to Classes</a>
+                                  <a href="introtoclasses2.html">Attributes and Methods</a>
+                                  <a href="introtoclasses3.html">Special Methods</a>
+                                  <a href="introtoclasses4.html"><strong>Inheritance</strong></a>
+                                </div>
+                        </div>
+                    </li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../notes.html">Notes</a></li>
+                </ul>
+            </nav>
+        </header>
+
+<p>Given a (parent or base) class with some functionality (methods and attributes), we can create another (child or derived) class that inherits all of the base class' information. This is the idea of inheritance in object oriented programming. This idea helps to cut down on repeated code and is convenient for projects as they grow in size.</p>
+
+---
+
+<h2>Creating a Subclass</h2>
+
+The syntax to create a class from another is:
+
+<pre>
+class DerivedClassName(BaseClassName):
+    pass
+</pre>
+
+---
+
+<h2>Inheriting Functionality</h2>
+
+<p>If we'd like our subclass to contain more attributes than the parent class, instead of defining a new <code>__init__</code> method with all the parent's attributes again, we can use the <code>super()</code> method to let the parent class handle the inherited attributes.</p>
+
+<pre>
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+class Student(Person):
+    def __init__(self, name, year_group):
+        super().__init__(firstname)
+        self.year_group = year_group
+</pre>
+
+---
+
+<h2>Overriding</h2>
+
+<p>Overriding a method inherited from a parent class is as simple as re-defining the method with the same name under the derived class.</p>
+
+---
+
+<h2>Useful Built-in Functions</h2>
+
+<p>Python has two built-in functions that give us information about inheritance. They return booleans as their output:</p>
+
+<ul>
+    <p>
+        <li><code>isinstance(x,y)</code> checks to see if an object <code>x</code> is an instance of a class <code>y</code></li>
+    </p>
+    <p>
+        <li><code>issubclass(x,y)</code> checks to see if the first input <code>x</code> is a subclass of a second class <code>y</code></li>
+    </p>
+</ul>
+
+    </body>
+</html>

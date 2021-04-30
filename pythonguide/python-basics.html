@@ -13,7 +13,7 @@
                 <ul>
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="../math.html">Math</a></li>
-                    <li class="py"><a href="python.html"><strong>Python</strong></a></li>
+                    <li class="py"><a href="../python.html"><strong>Python</strong></a></li>
                     <li>
                         <div class="dropdown">
                             <button class="dropbtn"><span class='bigger'>☰</span></button>
@@ -33,13 +33,56 @@
             </nav>
         </header>
 
+<p>Python supports many different types of operators (logical, comparison, arithmetic etc). They won't be covered here but a basic rundown can be found <a href="https://www.w3schools.com/python/python_operators.asp">here</a>.</p>
+
+<h2>Variables </h2>
+
+<p>A variable in python is a reserved memory location to store data. When a variable is created, some space in memory is reserved. Unlike other languages, the declaration to reserve space automatically happens when a value is assigned to a variable in Python. The syntax for creating a variable is:</p>
+
+<pre>variable_name = initial_value</pre>
+
+<p>The data stored in memory can be of many types. Some standard data types are:</p>
+
+<p>
+    <table class="leftlist" align="left" cellpadding="5" cellspacing="0">
+        <tr>
+            <td><strong>Numbers</strong></td>
+            <td>
+                Integers, floats and complex numbers e.g. <code>2, 0.5, 2+5j</code>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Strings</strong></td>
+            <td>Continuous sets of characters enclosed by quotation marks e.g. <code>'hello'</code></td>
+        </tr>
+        <tr>
+            <td><strong>Lists</strong></td>
+            <td>Items separated by commas and enclosed by square brackets <code>[1, 'hello', 10]</code></td>
+        </tr>
+        <tr>
+            <td><strong>Tuples</strong></td>
+            <td>Similar to lists but the items are enclosed by parentheses and the items cannot be changed after creation e.g. <code>(2,4)</code></td>
+        </tr>
+        <tr>
+            <td><strong>Dictionaries</strong></td>
+            <td>A type of hash table i.e. a list of <code>key:value</code> pairs enclosed by curly brackets e.g. <code>my_dict = {'name':'k', 'weight':50}</code></td>
+        </tr>
+    </table>
+</p>
+
+<p>Unlike other languages, variable types in Python also need not be declared in your code.</p>
+
+---
+
 <h2>Everything in Python is an Object</h2>
 
-<p>Python is an object-oriented language. We'll formally define objects later but what this means is that everything in Python is an object: strings, integers, functions etc. Every object in python has an identity, type and value.</p>
+<p>Python is an object-oriented language. We'll formally define objects later but what this means is that everything in Python is an object: strings, integers, functions etc. In this sense, every variable points to an object.</p>
+
+<p>Every object in Python has an identity, type and value.</p>
 
 <h3>Identity</h3>
 
-<p>The identity of an object is the unique identifier for an object and is used by Python to retrieve the object. We can return the identity of an object with <code>id()</code>. Once created, the identity of an object never changes.</p>
+<p>The identity of an object is the unique identifier for an object and is used by Python to retrieve the object from system memory. We can return the identity of an object with <code>id()</code>. Once created, the identity of an object never changes.</p>
 
 <h3>Type</h3>
 
@@ -53,9 +96,35 @@
 
 <h2>Mutable and Immutable</h2>
 
-<p>An immutable object's value cannot be changed after it's created. Attempting to modify an immutable object's value will result in a copy being created.</p>
+<p>A mutable object's content (value) can be changed without changing its identity.</p>
 
-<p>Mutable objects' values can be changed after creation.</p>
+<p>An immutable object's value cannot be changed after it's created. Attempting to modify an immutable object's value will result in a new variable being created.</p>
+
+<p>We can test the mutability of an object by using <code>id()</code>. For example, on my system:</p>
+
+<pre>
+s = 'abc'
+id(s)
+    > 4383489712
+s += 'xyz'
+print(s)
+    > abcxyz
+id(s)
+    > 4385098032
+
+x = [1,2]
+id(x)
+    > 4385029312
+x.append(3)
+print(x)
+    > [1, 2, 3]
+id(x)
+    > 4385029312 
+</pre>
+
+<p>We can see that the location in memory of the string variable <code>s</code> changes when we try to change its value. This means that strings are immutable. However, the identity of the list object <code>x</code> does not change when we change its value. This is because list objects are a mutable data type.</p>
+
+<p>Below is a table of common mutable and immutable data types.</p>
 
 <table align="center" cellpadding="5" cellspacing="0">
     <tr>
@@ -74,9 +143,17 @@
 
 ---
 
-<h2>Variable Assignment</h2>
+<h2>Functions</h2>
 
-<p>Variables are the primary way to store and refer to data in Python. We create variables in Python by putting a name to the left of an <code>=</code> sign and a value on the right e.g. <code>x = 10</code>. Variables in Python work fundamentally differently to other programming languages. Here's a fantastic post on <a href="https://realpython.com/pointers-in-python/">variables in Python and C and how to simulate pointers in Python</a>.</p>
+<p>Functions are a way to collect many different commands performed on several variables under a single name. We can define a function using the syntax:</p>
+
+<pre>
+def function_name(parameters):
+    commands
+    return something
+</pre>
+
+---
 
     </body>
 </html>

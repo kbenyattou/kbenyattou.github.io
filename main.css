@@ -47,6 +47,11 @@ ul, li {
     padding: 0;
 }
 
+.leftlist {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
 /*------------------------------------------------*/
 /*-- This section is for the top navigation bar --*/
 /*------------------------------------------------*/

@@ -35,17 +35,13 @@
 
 <h2>What is a Class?</h2>
 
-<p>If we were limited to strings, numbers and booleans, we'd have a tough time trying to model objects we see in the real world. To this end, we can write blocks of code that serve as blueprints for creating new data types. These blueprints are known as classes.</p>
+<p>If we were limited to basic types, we'd have a tough time trying to model objects we see in the real world. To this end, we can write blocks of code that serve as blueprints for creating new data types. These blueprints are known as classes.</p>
 
-<p>Classes are just specifications. We can't use classes themselves in our programs. Instead, we use classes to create objects (also known as instances). We use the word 'instantiate' to refer to the process by which an object is created from a class. By analogy with car manufacturing:</p>
+<p>Classes are just specifications. We can't use classes themselves in our programs. Instead, we use a class to create an object (also known as an instance of a class) - we use the word 'instantiate' to refer to this process.</p>
 
-<ul>
-    <li>the class would be the design blueprints for a type of car,</li>
-    <li>the instantiation/creation step would be the building process,</li>
-    <li>and the object is the end-result, a car.</li>
-</ul>
+<p><em>By analogy with car manufacturing, the class would be the design blueprints for a type of car, the creation step would be the building process, and the object is the end-result - an instance of a car that abides by the blueprints.</em></p>
 
-<p>Classes allow us to logically group data and functions in a way that's easy to re-use and build upon. This is part of the reason why they're useful.</p>
+<p>Classes allow us to logically group data and functions in a way that's easy to re-use and build upon. This explains some of their appeal.</p>
 
 ---
 
@@ -67,25 +63,28 @@ instance1 = ClassName()
 instance2 = ClassName()
 </pre>
 
-<p>Each instance created from a class is unique. For example, both instances above have different locations in system memory. Continuing the car analogy, if two identical cars are created from the same class, they are different objects despite being identically designed and built.</p>
+<p>Each instance created from a class is unique. Both instances above have different locations in system memory.</p>
+
+<p><em>By analogy with cars again, two identical cars (objects) created from the same blueprint (class) have different locations in space (memory).</em></p>
 
 ---
 
 <h2>Attributes</h2>
 
-<p>Naturally, we'd like to imbue our objects with information that describes them. To this end, we can create variables that are particular to an object. Attributes refer to variables associated with a class.</p>
+<p>Naturally, we'd like to imbue our classes and objects with information that describes them. To this end, we can assign variables to them. A variable associated with a class or its objects is called an <strong>attribute</strong>.</p>
 
-<h3>Instance Variables</h3>
+<h3>Instance Attributes</h3>
 
-A great benefit of using classes is that each instance of a class can hold different kinds of data. This data is referred to as an instance variable. We can define instance variables as follows:
+<p>At the lowest level, we can create different instances and manually assign different attributes to them. These are known as instance attributes.</p>
 
 <pre>
 instance1.name = 'First Last'
 instance1.height = 170
 instance1.weight = 60
+instance2.iq = 150
 </pre>
 
-<p>This process would be quite laborious if we have many instances. To this end, we can use what is known in object oriented programming as a constructor. A constructor is an example of a <u>function associated with a class</u>. Such functions are called <u>methods</u>.</p>
+<p>This process would be quite laborious if we had many instances. To counter this, we can use what is known in object oriented programming as a constructor to assign attributes with less syntax. A constructor is an example of a <u>function associated with a class</u>. Such functions are called <u>methods</u>.</p>
 
 ---
 

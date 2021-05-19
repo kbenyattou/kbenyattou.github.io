@@ -1,8 +1,9 @@
 html {
     color: #222222;
     background-color: #b5ce86;
+    /*background-color: #B9BDBF;*/
     /*color: #e7e2e2;
-    background: url(lights.png);*/
+    background: url(imagename.png);*/
     text-align: center;
     font-family: Palatino, serif;
     font-size: 15px;
@@ -10,6 +11,14 @@ html {
     margin: 0;
     padding: 0;
     /*width: 450px;*/
+    
+    /*------------------------------------------------*/
+    /*---- For the repeated screentone background ----*/
+    /*------------------------------------------------*/
+
+    /*background-image: url(assets/images/tile.png);
+    background-color: rgba(0,0,0,.2);
+    background-repeat: repeat;*/
 }
 
 /*-------------------------------------------------*/
@@ -192,3 +201,13 @@ code {
     /*color: #2c2828;*/
     /*https://codepen.io/sosuke/pen/Pjoqqp*/
 }
+
+/*----------------------------*/
+/*-- Responsive image width --*/
+/*----------------------------*/
+
+.responsive {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+  }

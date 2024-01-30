@@ -1,0 +1,31 @@
+<!doctype html>
+<html class="flexible">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/css/main.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" type="image/png" href="/favicon.png">
+
+        <!-- Fetching a nice font -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+        <!-- Fetching a preset theme -->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/apprentice.css"> -->
+
+        <!-- Using my own theme -->
+        <link rel="stylesheet" href="/css/keblight.css">
+
+        <!-- The script to execute it -->
+        <script>hljs.highlightAll();</script>
+
+    </head>
+
+    <body>
+        <header>{% include navigation.html %}</header>
+        <main class="content">{{ content }}</main>
+        <br>
+        <footer>{%- include footer.html -%}</footer>
+    </body>
+</html>

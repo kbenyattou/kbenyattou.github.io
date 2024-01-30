@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-01-29T12:26:38+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Khallil Benyattou</title><subtitle>A blog for mathematics, machine learning, statistics, data science, data analysis and programming.</subtitle><entry><title type="html">Netflix Big Data Analysis</title><link href="http://localhost:4000/portfolio/2024/01/netflix/" rel="alternate" type="text/html" title="Netflix Big Data Analysis" /><published>2024-01-18T00:00:00+00:00</published><updated>2024-01-18T00:00:00+00:00</updated><id>http://localhost:4000/portfolio/2024/01/netflix-data-analysis</id><content type="html" xml:base="http://localhost:4000/portfolio/2024/01/netflix/">&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;under construction&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This page is a placeholder for the Netflix project I did on the 18th January 2024 during the CambridgeSpark bootcamp. It will be updated as soon I can get to it.&lt;/p&gt;</content><author><name></name></author><category term="netflix" /><category term="data analysis" /><category term="pandas" /><summary type="html">under construction</summary></entry><entry><title type="html">Record Football Transfers (Part II - Prediction)</title><link href="http://localhost:4000/portfolio/2021/08/record-transfers-part-2/" rel="alternate" type="text/html" title="Record Football Transfers (Part II - Prediction)" /><published>2021-08-12T14:39:00+01:00</published><updated>2021-08-12T14:39:00+01:00</updated><id>http://localhost:4000/portfolio/2021/08/record-transfer-project-prediction</id><content type="html" xml:base="http://localhost:4000/portfolio/2021/08/record-transfers-part-2/">&lt;p&gt;Continuing on from my &lt;a href=&quot;/portfolio/2021/01/record-transfers-part-1/&quot;&gt;last project&lt;/a&gt;, I would like to apply some of the ML techniques I&apos;ve discovered (by watching the last few lectures of &lt;a href=&quot;http://ocw.mit.edu/6-0002F16&quot;&gt;MIT 6.0002&lt;/a&gt;) so that I can predict the average price of next year&apos;s high-profile transfers.&lt;/p&gt;
+
+&lt;p&gt;I&apos;ll be using the idea of polynomial linear regression to fit a curve to the data I&apos;ve collected and make a prediction using said curve.&lt;/p&gt;
+
+&lt;p&gt;The lack of information on the Wikipedia table between 2002 and 2008 would certainly affect the results so I added the top transfers from each year using the same sources as the Wikipedia table (and of course cross-checking my sources). Then I worked out the average price of the (at least 5 or more) highest transfers for each year and plotted them in red:
+&lt;img src=&quot;/assets/portfolio/2021/08/record-transfers-part-2/transfersav.svg&quot; class=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Using my dataset &lt;code&gt;fee_dataset&lt;/code&gt;, I used the following code to perform and plot polynomial linear regression to find the line (polynomial of degree 1) that best fits the data.
+
+&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;linear_model = pylab.polyfit(fee_dataset.year, fee_dataset.fee, 1)
+linear_predictions = pylab.polyval(linear_model, fee_dataset.year)
+pylab.plot(fee_dataset.year, linear_predictions, &apos;g--&apos;, linewidth=1, label=&quot;Linear&quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;p&gt;The &lt;code&gt;.polyfit(x, y, n)&lt;/code&gt; method of the &lt;code&gt;pyplot&lt;/code&gt; class returns a list of coefficients corresponding to the polynomial of degree &lt;code&gt;n&lt;/code&gt; that best approximates the data (independent variable, dependent variable) given by (&lt;code&gt;x&lt;/code&gt;,&lt;code&gt;y&lt;/code&gt;).&lt;/p&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;p&gt;&lt;code&gt;.polyval&lt;/code&gt; returns a set of predictions given the data.&lt;/p&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/portfolio/2021/08/record-transfers-part-2/polynomialfit.svg&quot; class=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The quartic model shows the most significant downturn beginning around 2019. The cubic model that&apos;s been fit to the data shows more of a plateau. There is some circumstantial evidence that contextualises the data:&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;&lt;p&gt;Despite the pandemic, FFP (Financial Fair Play) regulations have been relaxed in the most recent transfer window (2021) and the data that I&apos;ve collected concerns the upper echelon of football spending. &lt;del&gt;Their spending power defies the current global climate.&lt;/del&gt;&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;p&gt;Neymar&apos;s transfer for £198M also greatly skews the results for 2017. This transfer was a singularity amongst singularities. Without his contribution, the average would&apos;ve been £70.5M. &lt;del&gt;Thanks, PSG.&lt;/del&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The linear model fails to fit early (2000-2008) transfer data very well and doesn&apos;t account for the slowing down of spending in recent years. The quadratic model is slightly better than the linear model for early years but also fails to capture the current spending climate reasonably.&lt;/p&gt;
+
+&lt;p&gt;To quantify how well the models fit the data, I&apos;ve chosen to calculate a quantity, \(R^{2}\), known as the coefficient of determination. It&apos;s defined as:&lt;/p&gt;
+
+&lt;p&gt;$$ R^{2} = 1 - \dfrac{ \sum_{i} (y_{i} - p_{i})^{2}}{\sum_{i} (y_{i} - \mu)^{2}} $$&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;&lt;p&gt;&lt;code&gt;y&lt;/code&gt; \(= (y_{i})_{i \in I}\) is the sequence of dependent variable values (average fees in our case),&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;p&gt;&lt;code&gt;p&lt;/code&gt; \(= (p_{i})_{i \in I}\) is the sequence of predicted values from our model, and&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;p&gt;\(\mu\) is the mean of &lt;code&gt;y&lt;/code&gt; calculated in the ordinary way: \(\mu = \frac{1}{\#I} \left( \sum_{i \in I} y_{i} \right)\) where \(\#I\) is the number of terms in &lt;code&gt;y&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The calculation for \(R^{2}\) is simple to implement:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def coeff_determination(y,p):
+    ymean = sum(y)/len(y)
+    comp = sum([(yi - pi)**2 for yi,pi in zip(y,p)])/sum([(yi - ymean)**2 for yi in y])
+    return 1 - comp&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The results are as follows:&lt;/p&gt;
+
+&lt;pre&gt;    Linear model:       0.7562801560992423
+    Quadratic model:    0.8048401397741687
+    Cubic model:        0.8355798702015268
+    Quartic model:      0.8380772813567788&lt;/pre&gt;
+
+&lt;p&gt;The \(R^{2}\) values are all relatively high and the graphs don&apos;t seem to be over-fitting the data. They all reasonably capture the increasing average transfer fees as time progresses since the beginning of the century.&lt;/p&gt;
+
+&lt;p&gt;Taking into account all of the above, I&apos;m inclined to side with the cubic model over the others.&lt;/p&gt;
+
+&lt;p&gt;To predict the value of the cubic model for the year 2022, I can define a &lt;code&gt;Polynomial&lt;/code&gt; class that I&apos;ll feed the cubic model coefficients (found with &lt;code&gt;.polyfit(x,y,3)&lt;/code&gt;) to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Polynomial:
+    def __init__(self, coeffs):
+        self.coeffs = coeffs
+
+    def evaluate(self, a):
+        output = 0
+        for i in range(len(self.coeffs)):
+            output += self.coeffs[i]*(a**(len(self.coeffs) - 1 - i))
+        return output
+
+prediction = Polynomial(cubic_model).evaluate(22)&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Thus, the final prediction of this analysis is roughly &lt;strong&gt;£77.89M&lt;/strong&gt;!&lt;/p&gt;
+
+&lt;h2&gt;Postgame Analysis&lt;/h2&gt;
+
+&lt;p style=&quot;text-align: center&quot; class=&quot;date&quot;&gt;1st September 2022&lt;/p&gt;
+
+&lt;p&gt;The chosen polynomial linear regression model was quite close to the observed record fee. Antony was the record transfer in the 2022 summer transfer window for a fee of £82.2M which is £4.31M over the model&apos;s prediction of £77.89M!&lt;/p&gt;
+
+&lt;p&gt;Football inflation is truly incredible (and unsustainable...?)&lt;/p&gt;</content><author><name></name></author><category term="regression" /><category term="football" /><category term="transfers" /><summary type="html">Continuing on from my last project, I would like to apply some of the ML techniques I&apos;ve discovered (by watching the last few lectures of MIT 6.0002) so that I can predict the average price of next year&apos;s high-profile transfers.</summary></entry><entry><title type="html">Record Football Transfers (Part I - Data Scraping)</title><link href="http://localhost:4000/portfolio/2021/01/record-transfers-part-1/" rel="alternate" type="text/html" title="Record Football Transfers (Part I - Data Scraping)" /><published>2021-01-15T11:12:00+00:00</published><updated>2021-01-15T11:12:00+00:00</updated><id>http://localhost:4000/portfolio/2021/01/record-transfer-project-scraping</id><content type="html" xml:base="http://localhost:4000/portfolio/2021/01/record-transfers-part-1/">&lt;!--  --&gt;
+
+&lt;p&gt;The beautiful game has undergone a drastic shift. Nations now own clubs. Players are being exchanged for hundreds of millions of currency... and the Premier League won&apos;t let Newcastle join in on the fun.&lt;/p&gt;
+
+&lt;p&gt;I thought it would be interesting to graph the highest transfer fees over the past 20 years.&lt;/p&gt;
+
+&lt;h2&gt;Importing the Data&lt;/h2&gt;
+
+&lt;p&gt;First of all, I chose to scrape a table off Wikipedia that contained the most expensive football transfers. I did this by using several modules:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;I began by using the requests module to make a HTTP requests and retrieve the HTML from the url of a Wikipedia site stored in &lt;code&gt;wiki_url&lt;/code&gt;. The module isn&apos;t designed to parse the information.
+  &lt;pre&gt;&lt;code&gt;data = requests.get(wiki_url)&lt;/code&gt;&lt;/pre&gt;
+  &lt;/p&gt;&lt;/li&gt;
+  
+  &lt;li&gt;
+    &lt;p&gt;To parse the HTML, I passed it into &lt;code&gt;bs4&lt;/code&gt;&apos;s &lt;code&gt;BeautifulSoup&lt;/code&gt; constructor to return a tree-like object that we can interact with.&lt;/p&gt;
+    &lt;p style=&quot;text-align:right; &quot;&gt;&lt;span class=&quot;warning&quot;&gt;This part requires the &lt;code&gt;lxml&lt;/code&gt; parser to be installed. &lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;pre&gt;&lt;code&gt;soup = BeautifulSoup(data.text, &apos;lxml&apos;)&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+    &lt;p&gt;This &lt;code&gt;BeautifulSoup&lt;/code&gt; object supports methods like &lt;code&gt;.find()&lt;/code&gt; and &lt;code&gt;.find_all()&lt;/code&gt; to search the nested tag structure of a HTML document.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Cleaning the Data&lt;/h2&gt;
+
+&lt;p&gt;Data scraped from the internet is usually not in a presentable format. My end goal is to produce a table that&apos;s easy to read (and access information from). The first course of action was to deal with row elements that span multiple cells. Next up was to remove extra fluff from the cells. Wikipedia, for example, has loads of citations like[1] this. I defined a regular expression to get rid of them.
+&lt;pre&gt;&lt;code&gt;def remove_citation(n):
+    return re.sub(r&apos;[\[].*?[\]]&apos;, &apos;&apos;, n)&lt;/code&gt;&lt;/pre&gt;
+There was a fair bit of uninteresting code to fix up the table that I&apos;ll leave out. It was all essentially looking at the tag structure of the table and making changes where necessary.&lt;/p&gt;
+
+&lt;p&gt;Now I have a list of lists &lt;code&gt;[row1, ..., rown]&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;For an easy to way to build and sort a table, I used the &lt;code&gt;pandas&lt;/code&gt; module. I converted my list of lists to what is called a &lt;code&gt;DataFrame&lt;/code&gt; object in pandas. According to Google, a &lt;code&gt;DataFrame&lt;/code&gt; is a 2-dimensional labelled data structure with columns of potentially different types.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;df = pd.DataFrame(listofrows)
+
+df.columns = [&apos;name&apos;,&apos;from&apos;,&apos;to&apos;,&apos;position&apos;,&apos;feeeuro&apos;,&apos;fee&apos;,&apos;year&apos;,&apos;born&apos;]
+df.year = df.year.astype(int)
+df.fee = df.fee.astype(float)
+
+df = df.sort_values(by=[&apos;year&apos;,&apos;fee&apos;])&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;columns&lt;/code&gt; attribute labels the columns and the two lines that follow change the type of the column entries to &lt;code&gt;int&lt;/code&gt;egers and &lt;code&gt;float&lt;/code&gt;s respectively. A very useful method of the &lt;code&gt;DataFrame&lt;/code&gt; structure is the ability to sort the table by columns. I first sorted by the &lt;code&gt;&apos;year&apos;&lt;/code&gt; of the transfer (which is my independent variable) and the transfer &lt;code&gt;&apos;fee&apos;&lt;/code&gt; in GBP (my dependent variable).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Without posting the entirety of the table, it came out looking something like this:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;!-- &lt;code&gt; --&gt;
+                   name                from            to     position  feeeuro     fee  year  born
+47            Luís Figo           Barcelona   Real Madrid   Midfielder       62   37.00     0  1972
+24      Zinedine Zidane            Juventus   Real Madrid   Midfielder       76   46.60     1  1972
+34   Zlatan Ibrahimović         Inter Milan     Barcelona      Forward     69.5   56.00     9  1981
+37                 Kaká               Milan   Real Madrid   Midfielder       67   56.00     9  1982
+12    Cristiano Ronaldo   Manchester United   Real Madrid      Forward       94   80.00     9  1985
+&lt;!-- &lt;/code&gt; --&gt;
+&lt;/pre&gt;
+
+&lt;h2&gt;Visualising the Data&lt;/h2&gt;
+
+&lt;p&gt;Plotting the information was a simple case of using &lt;code&gt;pyplot&lt;/code&gt; from the &lt;code&gt;matplotlib&lt;/code&gt; module.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pyplot.title(&apos;The Highest Football Transfers&apos;)
+pyplot.xlabel(&apos;Year&apos;)
+pyplot.ylabel(r&apos;&apos;&apos;Transfer Fee (£M)&apos;&apos;&apos;)
+
+pyplot.plot(df.year, df.fee, &apos;o&apos;)
+pyplot.show()&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/portfolio/2021/01/record-transfers-part-1/wikitransfers.svg&quot; class=&quot;center&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Maybe I&apos;ll try some machine learning stuff to predict what the average high-profile 2022 signing will look like given the information I have.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Edit:&lt;/strong&gt; I did end up doing this. Follow &lt;a href=&quot;/portfolio/2021/08/record-transfers-part-2/&quot;&gt;this link&lt;/a&gt; to find the follow-up!&lt;/p&gt;</content><author><name></name></author><category term="scraping" /><category term="data analysis" /><summary type="html"></summary></entry><entry><title type="html">Y2K</title><link href="http://localhost:4000/portfolio/y2k/" rel="alternate" type="text/html" title="Y2K" /><published>2000-01-01T00:00:00+00:00</published><updated>2000-01-01T00:00:00+00:00</updated><id>http://localhost:4000/portfolio/test</id><content type="html" xml:base="http://localhost:4000/portfolio/y2k/">&lt;p&gt;We survived.&lt;/p&gt;
+
+&lt;p&gt;To build the files in the &lt;code&gt;_drafts&lt;/code&gt; folder, use the command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;jekyll serve --draft&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><category term="jekyll" /><summary type="html">We survived.</summary></entry></feed>

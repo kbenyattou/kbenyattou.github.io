@@ -1,0 +1,24 @@
+---
+layout: base
+---
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<!--{% if page.title == 'Welcome!'%}
+    This is the first post
+{% endif %}
+
+{% for post in site.pages %}
+    <li><a style="{% if page.url == post.url %}color:red;{%endif%}" href="{{ post.url }}">{{ post.title }}</a></li>
+{% endfor %}
+
+<h2>{{ post.title }}</h2>
+
+<h3>{{ post.author }}</h3>-->
+
+<h1 class="palatino">{{ page.title }}</h1>
+
+<p class="date">{{ page.date | date: "%d %B, %Y" }}</p>
+<p class="date">Categories: {% for category in page.categories %} {{category}}{% if forloop.last %}{% else %},{% endif %}{% endfor %}</p>
+
+{{ content }}

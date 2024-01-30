@@ -1,0 +1,108 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
+
+.hljs {
+  /* color: #abb2bf; */
+  /* background: rgba(216, 216, 216, 0.427); */
+  /* background: black; */
+  /* color: #001f33; */
+  background: rgb(235,238,245);
+  /* background: rgb(49, 49, 68) */
+
+  /* Softer colours */
+  /* background: rgb(219,214,210); */
+  /* color: #000000; */
+}
+
+/* if, else, for */
+.hljs-keyword {
+  /* color: #1f00cd; */
+  color: rgb(124,77,255);
+  /* font-weight: bold; */
+}
+
+/* class, def */
+.hljs-operator {
+  color: #F92672
+}
+
+/* Comments */
+.hljs-comment,
+.hljs-quote {
+  /* color: #b18eb1; */
+  color: rgb(169,169,170);
+  font-style: italic
+}
+
+/* Function name */
+.hljs-title.function_ {
+  /* color: rgb(177, 45, 85); */
+  color: rgb(38,190,196);
+}
+
+/* Parameters */
+.hljs-params {
+  color: rgb(240,170,11);
+  font-style: italic;
+}
+
+/* Built-in functions e.g. print(), len(), str() etc. */
+.hljs-built_in {
+  color: #b07404;
+}
+
+/* Numbers */
+.hljs-number {
+  /* color: #d19a66; */
+  color: rgb(251,101,0);
+}
+
+/* Booleans (and None) */
+.hljs-literal {
+  /* color: #56b6c2 */
+  color: #B45EA4
+}
+
+/* String */
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute {
+/* .hljs-meta .hljs-string { */
+  color: rgb(83,160,83);
+}
+
+/* Substring (like {stuff} in an f-string) */
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75
+}
+
+/* Name of a class */
+.hljs-title.class_ {
+  /* color: #c100d3; */
+  color: rgb(239,142,216);
+  /* font-weight: bold; */
+}
+
+/* @decorator */
+.hljs-meta {
+  color:rgb(208, 80, 144);
+}
+
+
+.hljs-emphasis {
+  font-style: italic
+}
+.hljs-strong {
+  font-weight: bold
+}
+.hljs-link {
+  text-decoration: underline
+}

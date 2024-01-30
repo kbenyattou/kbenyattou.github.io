@@ -1,0 +1,24 @@
+# Belongs at: /_data/navigation.yml
+
+- title: Home
+  url: /
+
+- title: About
+  url: /about/
+
+- title: Portfolio
+  url: /portfolio/
+
+- title: Notes
+  url: /notes/
+
+# Information about a group of pages
+#- title: Group of Pages
+#  url: /about/
+#  sublinks:
+#    - title: Sub-item 1
+#      url: /group/si1
+#    - title: Sub-item 2
+#      url: /group/si2
+#    - title: Sub-item 3
+#      url: /group/si3

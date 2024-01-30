@@ -1,0 +1,14 @@
+---
+layout: post
+title: "Y2K"
+#date: 2020-01-01 00:00:00 +0000
+categories: jekyll
+permalink: /portfolio/y2k/
+#author: 'you'
+---
+
+We survived.
+
+To build the files in the <code>_drafts</code> folder, use the command:
+
+<pre><code class="language-bash">jekyll serve --draft</code></pre>

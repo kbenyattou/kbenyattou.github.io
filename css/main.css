@@ -14,7 +14,15 @@ html {
 
 /* This section is for responsive width design */
 
-@media only screen and (min-width: 650px) {
+/* @media only screen and (min-width: 1150px) {
+    .flexible {margin: auto; width: 1150px;}
+} */
+
+@media only screen and (min-width: 900px) {
+    .flexible {margin: auto; width: 900px;}
+}
+
+@media only screen and (max-width: 650px) {
     .flexible {margin: auto; width: 650px;}
 }
 

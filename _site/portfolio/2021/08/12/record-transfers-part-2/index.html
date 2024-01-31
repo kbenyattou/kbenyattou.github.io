@@ -1,0 +1,222 @@
+<!doctype html>
+<html class="flexible">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/css/main.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" type="image/png" href="/favicon.png">
+
+        <!-- Fetching a nice font -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+
+        <!-- highlight.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+        <!-- Fetching a preset theme -->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/apprentice.css"> -->
+
+        <!-- Using my own theme -->
+        <link rel="stylesheet" href="/css/keblight.css">
+
+        <!-- The script to execute it -->
+        <script>hljs.highlightAll();</script>
+
+    </head>
+
+    <body>
+        <header><!-- This finds the current page so it can be highlighted. -->
+
+
+
+    
+        
+    
+
+
+    
+
+
+    
+        
+    
+
+
+    
+
+
+<!-- Then we build the nav bar. -->
+<nav class="navbar">
+    <ul>
+    
+        
+            <!-- We have to declare it 'null' to ensure it doesn't propagate. -->
+            
+        
+        
+        
+        <li><a href="/">Home</a></li>
+        
+    
+        
+            <!-- We have to declare it 'null' to ensure it doesn't propagate. -->
+            
+        
+        
+        
+        <li><a href="/about/">About</a></li>
+        
+    
+        
+            
+        
+        
+        
+        <li style="font-weight: 800"><a href="/portfolio/">Portfolio</a></li>
+        
+    
+        
+            <!-- We have to declare it 'null' to ensure it doesn't propagate. -->
+            
+        
+        
+        
+        <li><a href="/notes/">Notes</a></li>
+        
+    
+    </ul><hr>
+</nav></header>
+        <main class="content"><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<!--
+
+
+    <li><a style="" href="/404.html"></a></li>
+
+    <li><a style="" href="/about/">About</a></li>
+
+    <li><a style="" href="/blog/">Blog!</a></li>
+
+    <li><a style="" href="/">Welcome!</a></li>
+
+    <li><a style="" href="/notes/">Notes</a></li>
+
+    <li><a style="" href="/portfolio/">Portfolio</a></li>
+
+    <li><a style="" href="/secret/">Welcome to the Secret Page</a></li>
+
+    <li><a style="" href="/feed.xml"></a></li>
+
+
+<h2></h2>
+
+<h3></h3>-->
+
+<h1 class="palatino">Record Football Transfers (Part II - Prediction)</h1>
+
+<p class="date">12 August, 2021</p>
+<p class="date">Categories:  regression, football, transfers</p>
+
+<p>Continuing on from my <a href="/portfolio/2021/01/15/record-transfers-part-1/">last project</a>, I would like to apply some of the ML techniques I've discovered (by watching the last few lectures of <a href="http://ocw.mit.edu/6-0002F16">MIT 6.0002</a>) so that I can predict the average price of next year's high-profile transfers.</p>
+
+<p>I'll be using the idea of polynomial linear regression to fit a curve to the data I've collected and make a prediction using said curve.</p>
+
+<p>The lack of information on the Wikipedia table between 2002 and 2008 would certainly affect the results so I added the top transfers from each year using the same sources as the Wikipedia table (and of course cross-checking my sources). Then I worked out the average price of the (at least 5 or more) highest transfers for each year and plotted them in red:
+<img src="/assets/portfolio/2021/08/12/record-transfers-part-2/transfersav.svg" class="center" /></p>
+
+<p>Using my dataset <code>fee_dataset</code>, I used the following code to perform and plot polynomial linear regression to find the line (polynomial of degree 1) that best fits the data.
+
+<pre><code class="language-python">linear_model = pylab.polyfit(fee_dataset.year, fee_dataset.fee, 1)
+linear_predictions = pylab.polyval(linear_model, fee_dataset.year)
+pylab.plot(fee_dataset.year, linear_predictions, 'g--', linewidth=1, label="Linear")</code></pre>
+</p>
+
+<p>
+    <ul>
+        <li><p>The <code>.polyfit(x, y, n)</code> method of the <code>pyplot</code> class returns a list of coefficients corresponding to the polynomial of degree <code>n</code> that best approximates the data (independent variable, dependent variable) given by (<code>x</code>,<code>y</code>).</p></li>
+        <li><p><code>.polyval</code> returns a set of predictions given the data.</p></li>
+    </ul>
+</p>
+
+<p><img src="/assets/portfolio/2021/08/12/record-transfers-part-2/polynomialfit.svg" class="center" /></p>
+
+<p>The quartic model shows the most significant downturn beginning around 2019. The cubic model that's been fit to the data shows more of a plateau. There is some circumstantial evidence that contextualises the data:</p>
+
+<ul>
+    <li><p>Despite the pandemic, FFP (Financial Fair Play) regulations have been relaxed in the most recent transfer window (2021) and the data that I've collected concerns the upper echelon of football spending. <del>Their spending power defies the current global climate.</del></p></li>
+    <li><p>Neymar's transfer for £198M also greatly skews the results for 2017. This transfer was a singularity amongst singularities. Without his contribution, the average would've been £70.5M. <del>Thanks, PSG.</del></p></li>
+</ul>
+
+<p>The linear model fails to fit early (2000-2008) transfer data very well and doesn't account for the slowing down of spending in recent years. The quadratic model is slightly better than the linear model for early years but also fails to capture the current spending climate reasonably.</p>
+
+<p>To quantify how well the models fit the data, I've chosen to calculate a quantity, \(R^{2}\), known as the coefficient of determination. It's defined as:</p>
+
+<p>$$ R^{2} = 1 - \dfrac{ \sum_{i} (y_{i} - p_{i})^{2}}{\sum_{i} (y_{i} - \mu)^{2}} $$</p>
+
+<ul>
+    <li><p><code>y</code> \(= (y_{i})_{i \in I}\) is the sequence of dependent variable values (average fees in our case),</p></li>
+    <li><p><code>p</code> \(= (p_{i})_{i \in I}\) is the sequence of predicted values from our model, and</p></li>
+    <li><p>\(\mu\) is the mean of <code>y</code> calculated in the ordinary way: \(\mu = \frac{1}{\#I} \left( \sum_{i \in I} y_{i} \right)\) where \(\#I\) is the number of terms in <code>y</code>.</p></li>
+</ul>
+
+<p>The calculation for \(R^{2}\) is simple to implement:</p>
+
+<pre><code>def coeff_determination(y,p):
+    ymean = sum(y)/len(y)
+    comp = sum([(yi - pi)**2 for yi,pi in zip(y,p)])/sum([(yi - ymean)**2 for yi in y])
+    return 1 - comp</code></pre>
+
+<p>The results are as follows:</p>
+
+<pre>    Linear model:       0.7562801560992423
+    Quadratic model:    0.8048401397741687
+    Cubic model:        0.8355798702015268
+    Quartic model:      0.8380772813567788</pre>
+
+<p>The \(R^{2}\) values are all relatively high and the graphs don't seem to be over-fitting the data. They all reasonably capture the increasing average transfer fees as time progresses since the beginning of the century.</p>
+
+<p>Taking into account all of the above, I'm inclined to side with the cubic model over the others.</p>
+
+<p>To predict the value of the cubic model for the year 2022, I can define a <code>Polynomial</code> class that I'll feed the cubic model coefficients (found with <code>.polyfit(x,y,3)</code>) to:</p>
+
+<pre><code>class Polynomial:
+    def __init__(self, coeffs):
+        self.coeffs = coeffs
+
+    def evaluate(self, a):
+        output = 0
+        for i in range(len(self.coeffs)):
+            output += self.coeffs[i]*(a**(len(self.coeffs) - 1 - i))
+        return output
+
+prediction = Polynomial(cubic_model).evaluate(22)</code></pre>
+
+<p>Thus, the final prediction of this analysis is roughly <strong>£77.89M</strong>!</p>
+
+<h2>Postgame Analysis</h2>
+
+<p style="text-align: center" class="date">1 September, 2022</p>
+
+<p>The chosen polynomial linear regression model was quite close to the observed record fee. Antony was the record transfer in the 2022 summer transfer window for a fee of £82.2M which is £4.31M over the model's prediction of £77.89M!</p>
+
+<p>Football inflation is truly incredible (and unsustainable...?)</p>
+</main>
+        <br>
+        <footer><footer>
+<nav class="footbar" style="text-align: right;">
+    <hr>
+    <ul>
+        <li><a href="https://www.linkedin.com/in/kbenyattou/" class="linkedin">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+            </svg> LinkedIn
+        </a></li>
+
+        <li><a href="https://www.github.com/kbenyattou/" class="github">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+            </svg> GitHub
+        </a></li>
+    </ul>
+</nav>
+</footer></footer>
+    </body>
+</html>

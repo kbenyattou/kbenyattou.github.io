@@ -4,11 +4,7 @@ title: "Record Football Transfers (Part I - Data Scraping)"
 date: 2021-01-15 11:12:00 +0000
 categories: ['scraping', 'data analysis']
 permalink: /portfolio/2021/01/15/record-transfers-part-1/
-# author: 'you'
-# toc: true
 ---
-
-<!-- {% toc %} -->
 
 <p>The beautiful game has undergone a drastic shift. Nations now own clubs. Players are being exchanged for hundreds of millions of currency... and the Premier League won't let Newcastle join in on the fun.</p>
 

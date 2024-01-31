@@ -77,6 +77,6 @@ pyplot.show()</code></pre>
 
 <img src="/assets/portfolio/2021/01/15/record-transfers-part-1/wikitransfers.svg" class="center">
 
-<p>Maybe I'll try some machine learning stuff to predict what the average high-profile 2022 signing will look like given the information I have.</p>
+<p>Maybe I'll try to use a statistical model to predict what the average high-profile 2022 signing will look like given the information I have.</p>
 
 <p><strong>Edit:</strong> I did end up doing this. Follow <a href="/portfolio/2021/08/12/record-transfers-part-2/">this link</a> to find the follow-up!</p>

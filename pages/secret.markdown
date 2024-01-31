@@ -8,7 +8,7 @@ By clicking the secret button, you've managed to land here --- on the secret pag
 
 <br>
 <div align="center">
-    <a href="/index/">
+    <a href="/">
         <img class="svg" src="/assets/images/secretpage/higuma.jpg" style="opacity: 0.1; width: 200px"/>
     </a>
 </div>

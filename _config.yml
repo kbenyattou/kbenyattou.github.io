@@ -49,12 +49,12 @@ defaults:
         title: "My title"
 
 # TOC Settings
-toc:
- min_level: 1
- max_level: 3
- list_class: toc
- list_class: toc__list
- sublist_class: toc__sublist
+# toc:
+#  min_level: 1
+#  max_level: 3
+#  list_class: toc
+#  list_class: toc__list
+#  sublist_class: toc__sublist
 
 # Exclude from processing.
 # The following items will not be processed, by default.

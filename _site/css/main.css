@@ -265,9 +265,17 @@ code:hover{
     text-align: right;
 }
 
- .warning:after {
+.warning:after {
     content: ' ⚠';
-  }
+}
+
+.source {
+    color: #5f5f5f;
+    font-size: small;
+    margin: 0px 0px 0px 0px;
+    font-weight: 200;
+    text-align: right;
+}
 
 /* Changing the colour of items on hover */
 

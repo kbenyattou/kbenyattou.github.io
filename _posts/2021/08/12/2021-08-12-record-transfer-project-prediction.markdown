@@ -4,7 +4,6 @@ title: "Record Football Transfers (Part II - Prediction)"
 date: 2021-08-12 14:39:00 +0100
 categories: ['regression', 'football', 'transfers']
 permalink: /portfolio/2021/08/12/record-transfers-part-2/
-# author: 'you'
 ---
 
 <p>Continuing on from my <a href="/portfolio/2021/01/15/record-transfers-part-1/">last project</a>, I would like to apply some of the statistical modelling techniques I've discovered (by watching the last few lectures of <a href="http://ocw.mit.edu/6-0002F16">MIT 6.0002</a>) so that I can predict the average price of next year's high-profile transfers.</p>

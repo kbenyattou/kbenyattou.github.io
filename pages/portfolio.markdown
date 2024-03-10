@@ -1,7 +1,5 @@
 ---
-layout: blog
+layout: portfolio
 title: Portfolio
 permalink: /portfolio/
 ---
-
-This is some text.

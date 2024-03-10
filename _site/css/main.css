@@ -292,3 +292,51 @@ code:hover{
 .github:hover {
     color: rgb(128, 39, 183) !important;
 }
+
+.stackexchange {
+    filter: grayscale(100%);
+}
+
+.stackexchange:hover {
+    filter: grayscale(0%);
+    color: rgb(168, 0, 0) !important;
+}
+
+/* Interactive Mathematics Stack Exchange Logo */
+
+.msetop {
+    fill: #CB181F;
+    filter: grayscale(80%);
+    stroke:rgb(225, 6, 141);
+    stroke-width:0.1pt;
+}
+
+.msetop:hover {
+    filter: grayscale(0%);
+    fill: #CB181F;
+}
+
+.mseright {
+    fill: #B6161C;
+    filter: grayscale(80%);
+    stroke:rgb(225, 6, 141);
+    stroke-width:0.1pt;
+}
+
+.mseright:hover {
+    filter: grayscale(0%);
+    fill: #B6161C;
+}
+
+.msebottom {
+    fill: #7F0F13;
+    filter: grayscale(80%);
+    stroke:rgb(225, 6, 141);
+    stroke-width:0.1pt;
+}
+
+.msebottom:hover{
+    filter: grayscale(0%);
+    fill: #7F0F13;
+    /* stroke:none; */
+}

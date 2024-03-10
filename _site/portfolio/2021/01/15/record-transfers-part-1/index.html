@@ -20,6 +20,15 @@
         <!-- The script to execute it -->
         <script>hljs.highlightAll();</script>
 
+        <!-- Getting MathJax to work and linebreak properly -->
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                TeX: { extensions: ["autoload-all.js"] },
+                "CommonHTML": { linebreaks: { automatic: true } }
+            });
+        </script>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
     </head>
 
     <body>
@@ -37,6 +46,9 @@
 
     
         
+    
+
+
     
 
 
@@ -82,11 +94,18 @@
         <li><a href="/notes/">Notes</a></li>
         
     
+        
+            <!-- We have to declare it 'null' to ensure it doesn't propagate. -->
+            
+        
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+    
     </ul><hr>
 </nav></header>
-        <main class="content"><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-
-<!--
+        <main class="content"><!--
 
 
     <li><a style="" href="/404.html"></a></li>
@@ -97,7 +116,7 @@
 
     <li><a style="" href="/">Welcome!</a></li>
 
-    <li><a style="" href="/notes/">Notes</a></li>
+    <li><a style="" href="/notes/">Personal Notes</a></li>
 
     <li><a style="" href="/portfolio/">Portfolio</a></li>
 
@@ -117,7 +136,7 @@
 <p class="date">15 January, 2021</p>
 <p class="date">Categories:  scraping, data analysis</p>
 
-<p>The beautiful game has undergone a drastic shift. Nations now own clubs. Players are being exchanged for hundreds of millions of currency... and the Premier League won't let Newcastle join in on the fun.</p>
+<p>The beautiful game has undergone a drastic shift. Nations now own clubs. Players are being exchanged for hundreds of millions of currency… and the Premier League won’t let Newcastle join in on the fun.</p>
 
 <p>I thought it would be interesting to graph the highest transfer fees over the past 20 years.</p>
 
@@ -126,29 +145,29 @@
 <p>First of all, I chose to scrape a table off Wikipedia that contained the most expensive football transfers. I did this by using several modules:</p>
 
 <ul>
-  <li><p>I began by using the requests module to make a HTTP requests and retrieve the HTML from the url of a Wikipedia site stored in <code>wiki_url</code>. The module isn't designed to parse the information.
+  <li>I began by using the requests module to make a HTTP requests and retrieve the HTML from the url of a Wikipedia site stored in <code>wiki_url</code>. The module isn't designed to parse the information.
   <pre><code>data = requests.get(wiki_url)</code></pre>
-  </p></li>
+  </li>
   
   <li>
-    <p>To parse the HTML, I passed it into <code>bs4</code>'s <code>BeautifulSoup</code> constructor to return a tree-like object that we can interact with.</p>
+    To parse the HTML, I passed it into <code>bs4</code>'s <code>BeautifulSoup</code> constructor to return a tree-like object that we can interact with.
     <p style="text-align:right;"><span class="warning">This part requires the <code>lxml</code> parser to be installed. </span></p>
-    <p><pre><code>soup = BeautifulSoup(data.text, 'lxml')</code></pre></p>
-    <p>This <code>BeautifulSoup</code> object supports methods like <code>.find()</code> and <code>.find_all()</code> to search the nested tag structure of a HTML document.</p>
+    <pre><code>soup = BeautifulSoup(data.text, 'lxml')</code></pre>
+    This <code>BeautifulSoup</code> object supports methods like <code>.find()</code> and <code>.find_all()</code> to search the nested tag structure of a HTML document.
   </li>
 </ul>
 
 <h2>Cleaning the Data</h2>
 
-<p>Data scraped from the internet is usually not in a presentable format. My end goal is to produce a table that's easy to read (and access information from). The first course of action was to deal with row elements that span multiple cells. Next up was to remove extra fluff from the cells. Wikipedia, for example, has loads of citations like[1] this. I defined a regular expression to get rid of them.
+<p>Data scraped from the internet is usually not in a presentable format. My end goal is to produce a table that’s easy to read (and access information from). The first course of action was to deal with row elements that span multiple cells. Next up was to remove extra fluff from the cells. Wikipedia, for example, has loads of citations like[1] this. I defined a regular expression to get rid of them.</p>
 <pre><code>def remove_citation(n):
     return re.sub(r'[\[].*?[\]]', '', n)</code></pre>
-There was a fair bit of uninteresting code to fix up the table that I'll leave out. It was all essentially looking at the tag structure of the table and making changes where necessary.</p>
+<p>There was a fair bit of uninteresting code to fix up the table that I’ll leave out. It was all essentially looking at the tag structure of the table and making changes where necessary.</p>
 
 <p>Now I have a list of lists <code>[row1, ..., rown]</code>.</p>
 
 <ul>
-  <li><p>For an easy to way to build and sort a table, I used the <code>pandas</code> module. I converted my list of lists to what is called a <code>DataFrame</code> object in pandas. According to Google, a <code>DataFrame</code> is a 2-dimensional labelled data structure with columns of potentially different types.</p>
+  <li>For an easy to way to build and sort a table, I used the <code>pandas</code> module. I converted my list of lists to what is called a <code>DataFrame</code> object in pandas. According to Google, a <code>DataFrame</code> is a 2-dimensional labelled data structure with columns of potentially different types.
 
 <pre><code>df = pd.DataFrame(listofrows)
 
@@ -158,21 +177,19 @@ df.fee = df.fee.astype(float)
 
 df = df.sort_values(by=['year','fee'])</code></pre>
 
-<p>The <code>columns</code> attribute labels the columns and the two lines that follow change the type of the column entries to <code>int</code>egers and <code>float</code>s respectively. A very useful method of the <code>DataFrame</code> structure is the ability to sort the table by columns. I first sorted by the <code>'year'</code> of the transfer (which is my independent variable) and the transfer <code>'fee'</code> in GBP (my dependent variable).</p>
+The <code>columns</code> attribute labels the columns and the two lines that follow change the type of the column entries to <code>int</code>egers and <code>float</code>s respectively. A very useful method of the <code>DataFrame</code> structure is the ability to sort the table by columns. I first sorted by the <code>'year'</code> of the transfer (which is my independent variable) and the transfer <code>'fee'</code> in GBP (my dependent variable).
   </li>
 </ul>
 
 <p>Without posting the entirety of the table, it came out looking something like this:</p>
 
 <pre>
-<!-- <code> -->
                    name                from            to     position  feeeuro     fee  year  born
 47            Luís Figo           Barcelona   Real Madrid   Midfielder       62   37.00     0  1972
 24      Zinedine Zidane            Juventus   Real Madrid   Midfielder       76   46.60     1  1972
 34   Zlatan Ibrahimović         Inter Milan     Barcelona      Forward     69.5   56.00     9  1981
 37                 Kaká               Milan   Real Madrid   Midfielder       67   56.00     9  1982
 12    Cristiano Ronaldo   Manchester United   Real Madrid      Forward       94   80.00     9  1985
-<!-- </code> -->
 </pre>
 
 <h2>Visualising the Data</h2>
@@ -188,11 +205,11 @@ pyplot.show()</code></pre>
 
 <p><img src="/assets/portfolio/2021/01/15/record-transfers-part-1/wikitransfers.svg" class="center" /></p>
 
-<p>Maybe I'll try to use a statistical model to predict what the average high-profile 2022 signing will look like given the information I have.</p>
+<p>Maybe I’ll try to use a statistical model to predict what the average high-profile 2022 signing will look like given the information I have.</p>
 
 <p><strong>Edit:</strong> I did end up doing this. Follow <a href="/portfolio/2021/08/12/record-transfers-part-2/">this link</a> to find the follow-up!</p>
 </main>
-        <br>
+        <!-- <br> -->
         <footer><footer>
 <nav class="footbar" style="text-align: right;">
     <hr>
@@ -208,6 +225,39 @@ pyplot.show()</code></pre>
                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
             </svg> GitHub
         </a></li>
+
+        <!-- <li><a href="https://math.stackexchange.com/users/99916/" class="stackexchange">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 14 14">
+                <image x="0" y="0" width="14" height="14" href="/assets/social-icons/mse2.svg"></image>
+            </svg> Math SE
+        </a></li> -->
+
+        <li><a href="https://math.stackexchange.com/users/99916/" class="stackexchange">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" fill="currentColor" viewBox="0 0 14 13">
+                <g class="mse" width="14" height="14" style="transform: scale(0.27);">
+                    <path fill="#CB181F" d="M32.2 5.1l-8.7 5.1-8.8-5.1L23.4 0z"></path>
+                    <path fill="#B6161C" d="M32.2 5.1v10.1l-8.7 5.1V10.2z"></path>
+                    <path fill="#7F0F13" d="M23.5 10.2v10.1l-8.9-5.1.1-10.1z"></path>
+                    <path fill="#CB181F" d="M46.8 13.5L38 18.6l-8.8-5.1L38 8.4z"></path>
+                    <path fill="#B6161C" d="M46.8 13.5v10.1L38 28.7V18.6z"></path>
+                    <path fill="#7F0F13" d="M38 18.6v10.1l-8.8-5.1V13.5z"></path>
+                    <path fill="#CB181F" d="M46.8 30.3L38 35.4l-8.8-5.1 8.8-5.1z"></path>
+                    <path fill="#B6161C" d="M46.8 30.3v10.1L38 45.5V35.4z"></path>
+                    <path fill="#7F0F13" d="M38 35.4v10.1l-8.8-5.1V30.3z"></path>
+                    <path fill="#CB181F" d="M32.2 38.8l-8.7 5.1-8.8-5.1 8.7-5.1z"></path>
+                    <path fill="#B6161C" d="M32.2 38.8v10.1L23.5 54V43.9z"></path>
+                    <path fill="#7F0F13" d="M23.5 43.9V54l-8.9-5.1.1-10.1z"></path>
+                    <path fill="#CB181F" d="M17.6 30.3l-8.8 5.1L0 30.3l8.8-5.1z"></path>
+                    <path fill="#B6161C" d="M17.6 30.3v10.1l-8.8 5.1V35.4z"></path>
+                    <path fill="#7F0F13" d="M8.8 35.4v10.1L0 40.4V30.3z"></path>
+                    <path fill="#CB181F" d="M17.6 13.5l-8.7 5.1-8.8-5.1 8.7-5.1z"></path>
+                    <path fill="#B6161C" d="M17.6 13.5v10.1l-8.7 5.1V18.6z"></path>
+                    <path fill="#7F0F13" d="M8.9 18.6v10.1L0 23.6l.1-10.1z"></path>
+                    <path fill="#7F0F13" d="M23.5 20.3l-8.8-5.1V5.1l8.8 5.1z"></path>
+                </g>
+            </svg> Math SE
+        </a></li>
+        
     </ul>
 </nav>
 </footer></footer>

@@ -20,6 +20,15 @@
         <!-- The script to execute it -->
         <script>hljs.highlightAll();</script>
 
+        <!-- Getting MathJax to work and linebreak properly -->
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                TeX: { extensions: ["autoload-all.js"] },
+                "CommonHTML": { linebreaks: { automatic: true } }
+            });
+        </script>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
     </head>
 
     <body>
@@ -37,6 +46,9 @@
 
     
         
+    
+
+
     
 
 
@@ -82,11 +94,18 @@
         <li><a href="/notes/">Notes</a></li>
         
     
+        
+            <!-- We have to declare it 'null' to ensure it doesn't propagate. -->
+            
+        
+        
+        
+        <li><a href="/blog/">Blog</a></li>
+        
+    
     </ul><hr>
 </nav></header>
-        <main class="content"><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-
-<!--
+        <main class="content"><!--
 
 
     <li><a style="" href="/404.html"></a></li>
@@ -97,7 +116,7 @@
 
     <li><a style="" href="/">Welcome!</a></li>
 
-    <li><a style="" href="/notes/">Notes</a></li>
+    <li><a style="" href="/notes/">Personal Notes</a></li>
 
     <li><a style="" href="/portfolio/">Portfolio</a></li>
 
@@ -117,49 +136,46 @@
 <p class="date">12 August, 2021</p>
 <p class="date">Categories:  regression, football, transfers</p>
 
-<p>Continuing on from my <a href="/portfolio/2021/01/15/record-transfers-part-1/">last project</a>, I would like to apply some of the statistical modelling techniques I've discovered (by watching the last few lectures of <a href="http://ocw.mit.edu/6-0002F16">MIT 6.0002</a>) so that I can predict the average price of next year's high-profile transfers.</p>
+<p>Continuing on from my <a href="/portfolio/2021/01/15/record-transfers-part-1/">last project</a>, I would like to apply some of the statistical modelling techniques I’ve discovered (by watching the last few lectures of <a href="http://ocw.mit.edu/6-0002F16">MIT 6.0002</a>) so that I can predict the average price of next year’s high-profile transfers.</p>
 
-<p>I'll be using the idea of polynomial linear regression to fit a curve to the data I've collected and make a prediction using said curve.</p>
+<p>I’ll be using the idea of polynomial linear regression to fit a curve to the data I’ve collected and make a prediction using said curve.</p>
 
 <p>The lack of information on the Wikipedia table between 2002 and 2008 would certainly affect the results so I added the top transfers from each year using the same sources as the Wikipedia table (and of course cross-checking my sources). Then I worked out the average price of the (at least 5 or more) highest transfers for each year and plotted them in red:
 <img src="/assets/portfolio/2021/08/12/record-transfers-part-2/transfersav.svg" class="center" /></p>
 
-<p>Using my dataset <code>fee_dataset</code>, I used the following code to perform and plot polynomial linear regression to find the line (polynomial of degree 1) that best fits the data.
+<p>Using my dataset <code>fee_dataset</code>, I used the following code to perform and plot polynomial linear regression to find the line (polynomial of degree 1) that best fits the data.</p>
 
 <pre><code class="language-python">linear_model = pylab.polyfit(fee_dataset.year, fee_dataset.fee, 1)
 linear_predictions = pylab.polyval(linear_model, fee_dataset.year)
 pylab.plot(fee_dataset.year, linear_predictions, 'g--', linewidth=1, label="Linear")</code></pre>
-</p>
 
-<p>
-    <ul>
-        <li><p>The <code>.polyfit(x, y, n)</code> method of the <code>pyplot</code> class returns a list of coefficients corresponding to the polynomial of degree <code>n</code> that best approximates the data (independent variable, dependent variable) given by (<code>x</code>,<code>y</code>).</p></li>
-        <li><p><code>.polyval</code> returns a set of predictions given the data.</p></li>
-    </ul>
-</p>
+<ul>
+    <li>The <code>.polyfit(x, y, n)</code> method of the <code>pyplot</code> class returns a list of coefficients corresponding to the polynomial of degree <code>n</code> that best approximates the data (independent variable, dependent variable) given by (<code>x</code>,<code>y</code>).</li>
+    <li><code>.polyval</code> returns a set of predictions given the data.</li>
+</ul>
 
 <p><img src="/assets/portfolio/2021/08/12/record-transfers-part-2/polynomialfit.svg" class="center" /></p>
 
-<p>The quartic model shows the most significant downturn beginning around 2019. The cubic model that's been fit to the data shows more of a plateau. There is some circumstantial evidence that contextualises the data:</p>
+<p>The quartic model shows the most significant downturn beginning around 2019. The cubic model that’s been fit to the data shows more of a plateau. There is some circumstantial evidence that contextualises the data:</p>
 
 <ul>
-    <li><p>Despite the pandemic, FFP (Financial Fair Play) regulations have been relaxed in the most recent transfer window (2021) and the data that I've collected concerns the upper echelon of football spending. <del>Their spending power defies the current global climate.</del></p></li>
-    <li><p>Neymar's transfer for £198M also greatly skews the results for 2017. This transfer was a singularity amongst singularities. Without his contribution, the average would've been £70.5M. <del>Thanks, PSG.</del></p></li>
+    <li>Despite the pandemic, FFP (Financial Fair Play) regulations have been relaxed in the most recent transfer window (2021) and the data that I've collected concerns the upper echelon of football spending. <del>Their spending power defies the current global climate.</del></li>
+    <li>Neymar's transfer for £198M also greatly skews the results for 2017. This transfer was a singularity amongst singularities. Without his contribution, the average would've been £70.5M. <del>Thanks, PSG.</del></li>
 </ul>
 
-<p>The linear model fails to fit early (2000-2008) transfer data very well and doesn't account for the slowing down of spending in recent years. The quadratic model is slightly better than the linear model for early years but also fails to capture the current spending climate reasonably.</p>
+<p>The linear model fails to fit early (2000-2008) transfer data very well and doesn’t account for the slowing down of spending in recent years. The quadratic model is slightly better than the linear model for early years but also fails to capture the current spending climate reasonably.</p>
 
-<p>To quantify how well the models fit the data, I've chosen to calculate a quantity, \(R^{2}\), known as the coefficient of determination. It's defined as:</p>
+<p>To quantify how well the models fit the data, I’ve chosen to calculate a quantity, (R^{2}), known as the coefficient of determination. It’s defined as:</p>
 
-<p>$$ R^{2} = 1 - \dfrac{ \sum_{i} (y_{i} - p_{i})^{2}}{\sum_{i} (y_{i} - \mu)^{2}} $$</p>
+\[R^{2} = 1 - \dfrac{ \sum_{i} (y_{i} - p_{i})^{2}}{\sum_{i} (y_{i} - \mu)^{2}}\]
 
 <ul>
-    <li><p><code>y</code> \(= (y_{i})_{i \in I}\) is the sequence of dependent variable values (average fees in our case),</p></li>
-    <li><p><code>p</code> \(= (p_{i})_{i \in I}\) is the sequence of predicted values from our model, and</p></li>
-    <li><p>\(\mu\) is the mean of <code>y</code> calculated in the ordinary way: \(\mu = \frac{1}{\#I} \left( \sum_{i \in I} y_{i} \right)\) where \(\#I\) is the number of terms in <code>y</code>.</p></li>
+    <li><code>y</code> \(= (y_{i})_{i \in I}\) is the sequence of dependent variable values (average fees in our case),</li>
+    <li><code>p</code> \(= (p_{i})_{i \in I}\) is the sequence of predicted values from our model, and</li>
+    <li>\(\mu\) is the mean of <code>y</code> calculated in the ordinary way: \(\mu = \frac{1}{\#I} \left( \sum_{i \in I} y_{i} \right)\) where \(\#I\) is the number of terms in <code>y</code>.</li>
 </ul>
 
-<p>The calculation for \(R^{2}\) is simple to implement:</p>
+<p>The calculation for (R^{2}) is simple to implement:</p>
 
 <pre><code>def coeff_determination(y,p):
     ymean = sum(y)/len(y)
@@ -173,11 +189,11 @@ pylab.plot(fee_dataset.year, linear_predictions, 'g--', linewidth=1, label="Line
     Cubic model:        0.8355798702015268
     Quartic model:      0.8380772813567788</pre>
 
-<p>The \(R^{2}\) values are all relatively high and the graphs don't seem to be over-fitting the data. They all reasonably capture the increasing average transfer fees as time progresses since the beginning of the century.</p>
+<p>The (R^{2}) values are all relatively high and the graphs don’t seem to be over-fitting the data. They all reasonably capture the increasing average transfer fees as time progresses since the beginning of the century.</p>
 
-<p>Taking into account all of the above, I'm inclined to side with the cubic model over the others.</p>
+<p>Taking into account all of the above, I’m inclined to side with the cubic model over the others.</p>
 
-<p>To predict the value of the cubic model for the year 2022, I can define a <code>Polynomial</code> class that I'll feed the cubic model coefficients (found with <code>.polyfit(x,y,3)</code>) to:</p>
+<p>To predict the value of the cubic model for the year 2022, I can define a <code>Polynomial</code> class that I’ll feed the cubic model coefficients (found with <code>.polyfit(x,y,3)</code>) to:</p>
 
 <pre><code>class Polynomial:
     def __init__(self, coeffs):
@@ -197,11 +213,11 @@ prediction = Polynomial(cubic_model).evaluate(22)</code></pre>
 
 <p style="text-align: center" class="date">1 September, 2022</p>
 
-<p>The chosen polynomial linear regression model was quite close to the observed record fee. Antony was the record transfer in the 2022 summer transfer window for a fee of £82.2M which is £4.31M over the model's prediction of £77.89M!</p>
+<p>The chosen polynomial linear regression model was quite close to the observed record fee. Antony was the record transfer in the 2022 summer transfer window for a fee of £82.2M which is £4.31M over the model’s prediction of £77.89M!</p>
 
-<p>Football inflation is truly incredible (and unsustainable...?)</p>
+<p>Football inflation is truly incredible (and unsustainable…?)</p>
 </main>
-        <br>
+        <!-- <br> -->
         <footer><footer>
 <nav class="footbar" style="text-align: right;">
     <hr>
@@ -217,6 +233,39 @@ prediction = Polynomial(cubic_model).evaluate(22)</code></pre>
                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
             </svg> GitHub
         </a></li>
+
+        <!-- <li><a href="https://math.stackexchange.com/users/99916/" class="stackexchange">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 14 14">
+                <image x="0" y="0" width="14" height="14" href="/assets/social-icons/mse2.svg"></image>
+            </svg> Math SE
+        </a></li> -->
+
+        <li><a href="https://math.stackexchange.com/users/99916/" class="stackexchange">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" fill="currentColor" viewBox="0 0 14 13">
+                <g class="mse" width="14" height="14" style="transform: scale(0.27);">
+                    <path fill="#CB181F" d="M32.2 5.1l-8.7 5.1-8.8-5.1L23.4 0z"></path>
+                    <path fill="#B6161C" d="M32.2 5.1v10.1l-8.7 5.1V10.2z"></path>
+                    <path fill="#7F0F13" d="M23.5 10.2v10.1l-8.9-5.1.1-10.1z"></path>
+                    <path fill="#CB181F" d="M46.8 13.5L38 18.6l-8.8-5.1L38 8.4z"></path>
+                    <path fill="#B6161C" d="M46.8 13.5v10.1L38 28.7V18.6z"></path>
+                    <path fill="#7F0F13" d="M38 18.6v10.1l-8.8-5.1V13.5z"></path>
+                    <path fill="#CB181F" d="M46.8 30.3L38 35.4l-8.8-5.1 8.8-5.1z"></path>
+                    <path fill="#B6161C" d="M46.8 30.3v10.1L38 45.5V35.4z"></path>
+                    <path fill="#7F0F13" d="M38 35.4v10.1l-8.8-5.1V30.3z"></path>
+                    <path fill="#CB181F" d="M32.2 38.8l-8.7 5.1-8.8-5.1 8.7-5.1z"></path>
+                    <path fill="#B6161C" d="M32.2 38.8v10.1L23.5 54V43.9z"></path>
+                    <path fill="#7F0F13" d="M23.5 43.9V54l-8.9-5.1.1-10.1z"></path>
+                    <path fill="#CB181F" d="M17.6 30.3l-8.8 5.1L0 30.3l8.8-5.1z"></path>
+                    <path fill="#B6161C" d="M17.6 30.3v10.1l-8.8 5.1V35.4z"></path>
+                    <path fill="#7F0F13" d="M8.8 35.4v10.1L0 40.4V30.3z"></path>
+                    <path fill="#CB181F" d="M17.6 13.5l-8.7 5.1-8.8-5.1 8.7-5.1z"></path>
+                    <path fill="#B6161C" d="M17.6 13.5v10.1l-8.7 5.1V18.6z"></path>
+                    <path fill="#7F0F13" d="M8.9 18.6v10.1L0 23.6l.1-10.1z"></path>
+                    <path fill="#7F0F13" d="M23.5 20.3l-8.8-5.1V5.1l8.8 5.1z"></path>
+                </g>
+            </svg> Math SE
+        </a></li>
+        
     </ul>
 </nav>
 </footer></footer>

@@ -44,3 +44,7 @@ defaults:
     values:
       layout: "base"
       title: "My title"
+
+collections:
+  blogposts:
+    output: true

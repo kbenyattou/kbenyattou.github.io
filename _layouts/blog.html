@@ -6,8 +6,10 @@ layout: base
 
 <h1 class="palatino">{{ page.title }}</h1>
 
-{% for post in site.posts %}
-    <p class="date">{{ post.date | date: "%d %B, %Y" }}</p>
-    <a href="{{ post.url }}">{{ post.title }}</a>
+{{ content }}
+
+{% for blogpost in site.blogposts reversed %}
+    <p class="date">{{ blogpost.date | date: "%d %B, %Y" }}</p>
+    <a href="{{ blogpost.url }}">{{ blogpost.title }}</a>
     <br></br>
     {% endfor %}

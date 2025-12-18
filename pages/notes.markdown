@@ -4,7 +4,10 @@ title: 'Personal Notes'
 permalink: /notes/
 ---
 
-My most recent passion project has been an 18-month-long deep-dive from scratch (in some sense) into measure-theoretic probability. <a href="/assets/notes/KB103.pdf">Conditional Exkebtations</a> <img src="/assets/images/pdf-logo.png" class="icon"></li> (Latest Update: 25-12-18)
+My most recent passion project has been an 18-month-long deep-dive into measure-theoretic probability.
+<ul>
+    <li><a href="/assets/notes/KB103.pdf">Conditional Exkebtations</a> <img src="/assets/images/pdf-logo.png" class="icon"> (Latest Update: 25-12-18)</li>
+</ul>
 
 Other notes I've compiled in the past include:
 <ul>

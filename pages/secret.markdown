@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Welcome to the Secret Page
+title: Miscellaneous
 permalink: /secret/
 ---
 
-By clicking the secret button, you've managed to land here --- on the secret page. This is where I play around with CSS and HTML.
+By clicking the secret button, you've managed to land here --- on the secret page. There are some interesting bits and bobs here.
 
 <ul>
     <li>
@@ -33,6 +33,7 @@ By clicking the secret button, you've managed to land here --- on the secret pag
             </g>
         </svg></p>
     </li>
+    <li>If you're having a nightmare setting up your GitHub Pages, here's an invaluable article called <a href="https://medium.com/@ritviknag/ruby-versioning-trouble-with-jekyll-github-pages-fd2748bf4e1d">Ruby (Versioning) Hell with Jekyll & GitHub Pages</a> by Ritvik Nag.</li>
 </ul>
 
 <!-- <div align="center">

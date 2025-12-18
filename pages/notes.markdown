@@ -4,7 +4,9 @@ title: 'Personal Notes'
 permalink: /notes/
 ---
 
-I often compile my own personal sets of notes on topics I'm interested in. Here are a few I've typeset in the language \(\TeX\):
+My most recent passion project has been an 18-month-long deep-dive from scratch (in some sense) into measure-theoretic probability. <a href="/assets/notes/KB103.pdf">Conditional Exkebtations</a> <img src="/assets/images/pdf-logo.png" class="icon"></li> (Latest Update: 25-12-18)
+
+Other notes I've compiled in the past include:
 <ul>
     <li><a href="/assets/notes/KB100.pdf">Introduction to Python & Algorithms</a> <img src="/assets/images/pdf-logo.png" class="icon"></li>
     <li><a href="/assets/notes/KB101.pdf">Introduction to Data Science</a> <img src="/assets/images/pdf-logo.png" class="icon"></li>
@@ -25,14 +27,14 @@ I often compile my own personal sets of notes on topics I'm interested in. Here 
 
 <ul>
     <li><a href="/assets/notes/ST202.pdf">ST202 Stochastic Processes</a> <img src="/assets/images/pdf-logo.png" class="icon">
-    <br>These notes introduce random walks, branching processes and formalise Markov Processes and follow the course I took at Warwick.
+    <br>These notes introduce random walks, branching processes and formalise Markov Processes, following the course I took at Warwick.
     </li>
 </ul>
 
 <ul>
     <li>
         <a href="/assets/notes/7CCM327BT_Benyattou.pdf">7CCM327BT MSc Topology</a> <img src="/assets/images/pdf-logo.png" class="icon">
-        <br>Used at King's College London by Prof. Igor Wigman during both the 2017-18 and 2018-19 academic years, this document covers point-set topology (continuity, connectedness, compactness) and serve as an introduction to algebraic topology (fundamental groups). At least 100 students have made use of them so far.
+        <br>Used at King's College London by Prof. Igor Wigman during both the 2017-18 and 2018-19 academic years, this document covers point-set topology (continuity, connectedness, compactness) and serves as an introduction to algebraic topology (fundamental groups). At least 100 students have made use of it so far.
     </li>
 </ul>
 

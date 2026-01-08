@@ -6,14 +6,18 @@ permalink: /notes/
 
 My most recent passion project has been an 18-month-long deep-dive into measure-theoretic probability.
 <ul>
-    <li><a href="/assets/notes/KB103.pdf">Conditional Exkebtations</a> <img src="/assets/images/pdf-logo.png" class="icon"> (Latest Update: 26-01-04)</li>
+    <li><a href="/assets/notes/KEB103.pdf">Conditional Exkebtations</a> <img src="/assets/images/pdf-logo.png" class="icon"> (Latest Big Update: 26-01-07)</li>
+</ul>
+
+As with most things in life, with new information we re-assess. Learning probability has led me to re-evaluate a lot of ideas that were incorrectly presented to me in CS229, on which my Machine Learning notes are based:
+<ul>
+    <li><a href="/assets/notes/KEB102.pdf">Introduction to Machine Learning</a> <img src="/assets/images/pdf-logo.png" class="icon"></li>
 </ul>
 
 Other notes I've compiled in the past include:
 <ul>
-    <li><a href="/assets/notes/KB100.pdf">Introduction to Python & Algorithms</a> <img src="/assets/images/pdf-logo.png" class="icon"></li>
-    <li><a href="/assets/notes/KB101.pdf">Introduction to Data Science</a> <img src="/assets/images/pdf-logo.png" class="icon"></li>
-    <li><a href="/assets/notes/KB102.pdf">Introduction to Machine Learning</a> <img src="/assets/images/pdf-logo.png" class="icon"> This is very much a work in progress.</li>
+    <li><a href="/assets/notes/KEB100.pdf">Introduction to Python & Algorithms</a> <img src="/assets/images/pdf-logo.png" class="icon"></li>
+    <li><a href="/assets/notes/KEB101.pdf">Introduction to Data Science</a> <img src="/assets/images/pdf-logo.png" class="icon"></li>
 </ul>
 
 <p>Here is a link to a tutorial for <a href="https://github.com/cnguyen-uk/Getting-Started-With-LaTeX">Getting Started With \(\LaTeX\)</a> by <code><a href="https://github.com/cnguyen-uk">cnguyen-uk</a></code>.</p>

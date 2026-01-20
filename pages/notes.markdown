@@ -6,12 +6,12 @@ permalink: /notes/
 
 My most recent passion project has been an 18-month-long deep-dive into measure-theoretic probability.
 <ul>
-    <li><a href="/assets/notes/KEB103.pdf">Conditional Exkebtations</a> <img src="/assets/images/pdf-logo.png" class="icon"> (Latest Big Update: 26-01-07)</li>
+    <li><a href="/assets/notes/KEB103.pdf">Conditional Exkebtations</a> <img src="/assets/images/pdf-logo.png" class="icon"> (Latest Big Update: 26-01-20)</li>
 </ul>
 
 As with most things in life, with new information we re-assess. Learning probability has led me to re-evaluate a lot of ideas that were incorrectly presented to me in CS229, on which my Machine Learning notes are based:
 <ul>
-    <li><a href="/assets/notes/KEB102.pdf">Introduction to Machine Learning</a> <img src="/assets/images/pdf-logo.png" class="icon"></li>
+    <li><a href="/assets/notes/KEB102.pdf">Introduction to Machine Learning</a> <img src="/assets/images/pdf-logo.png" class="icon"> (Latest Big Update: 26-01-20)</li>
 </ul>
 
 Other notes I've compiled in the past include:

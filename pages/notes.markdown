@@ -4,7 +4,12 @@ title: 'Personal Notes'
 permalink: /notes/
 ---
 
-My most recent passion project has been an 18-month-long deep-dive into measure-theoretic probability.
+My most-most-recent project has been recovering my lost linear algebra knowledge (with a slight category theoretic spin at points). It's been incredibly fun!
+<ul>
+    <li><a href="/assets/notes/KEB104.pdf">Linear Alkebra</a> <img src="/assets/images/pdf-logo.png" class="icon"> (Latest Big Update: 26-03-17)</li>
+</ul>
+
+My most-recent passion project has been an 18-month-long deep-dive into measure-theoretic probability.
 <ul>
     <li><a href="/assets/notes/KEB103.pdf">Conditional Exkebtations</a> <img src="/assets/images/pdf-logo.png" class="icon"> (Latest Big Update: 26-01-20)</li>
 </ul>

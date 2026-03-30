@@ -1,0 +1,35 @@
+---
+layout: post
+title: "Test Post"
+date: 2024-02-04 12:45:00 +0000
+categories: ['Test', 'MathJax', 'Mathematics']
+permalink: /blog/2024/02/07/test-post/
+---
+
+Inline mathematics is given by either <code>\\(abc\\)</code> or <code>$abc$</code> for example, and outputs \\(abc\\).
+
+Displayed math goes in <code>\\[</code> ... <code>\\]</code> braces, and outputs \\[ \sum_{i=1}^{n} a_{i}. \\]
+
+This is a[^1] <code>a[^1]</code> footnote.
+
+This is an example of an equation with a tag, and a label (for reference).
+
+<pre><code>\begin{equation} \dfrac{\partial}{\partial \theta_{i}} f(x, \Theta) \tag{1} \label{eqone} \end{equation}</code></pre>
+
+\begin{equation} \dfrac{\partial}{\partial \theta_{i}} f(x, \Theta) \tag{1} \label{eqone} \end{equation}
+
+A reference to a tagged equation is given by <code>\eqref{eqone}</code> for example, and outputs \eqref{eqone}.
+
+<!-- \tag{symbol} \label{equation-name} -->
+<!-- \eqref{equation-name} -->
+
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+
+At the end of the document, the footnotes are manually inserted.
+
+<pre><code>[^1]: Some footnote. </code></pre>
+
+[^1]: Some footnote.

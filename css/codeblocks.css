@@ -1,0 +1,223 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
+
+
+
+.hljs[class*="language-diff"].hljs-addition {
+  color: rgb(0, 170, 37)
+}
+
+.hljs[class*="language-diff"].hljs-deletion {
+  color: rgb(170, 9, 0)
+}
+
+
+
+
+.hljs[class*="language-python"] {
+  background: #eeffcc;
+}
+
+code.hljs[class*="language-python"]:hover{
+  background-color: #e9ffbe;
+}
+
+/* if, else, for, while, return, import, def, class, with, as, in, not, and, or, is, lambda, pass, break, continue, yield, raise, try, except, finally */
+.hljs[class*="language-python"] .hljs-keyword {
+  color: rgb(124,77,255);
+  font-weight:500;
+}
+
+/* = + - * ** // % == != >= <= */
+.hljs[class*="language-python"] .hljs-operator {
+  color: #F92672
+}
+
+/* Comments */
+.hljs[class*="language-python"] .hljs-comment,
+.hljs[class*="language-python"] .hljs-quote {
+  /* color: #b18eb1; */
+  color: rgb(169,169,170);
+  font-style: italic
+}
+
+/* Colour of a class in the class definition */
+.hljs[class*="language-python"] .hljs-title.class {
+  color: rgb(239, 142, 216);
+}
+
+/* Colour of function name specifically */
+.hljs[class*="language-python"] .hljs-title.function_ {
+  color: rgb(38, 190, 196);
+}
+
+/* Parameters of a function */
+.hljs[class*="language-python"] .hljs-params {
+  color: rgb(240,170,11);
+  font-style: italic;
+}
+
+/* Built-in functions e.g. print(), len(), str() etc. */
+.hljs[class*="language-python"] .hljs-built_in {
+  color: rgb(176, 116, 4);
+}
+
+/* Numbers */
+.hljs[class*="language-python"] .hljs-number {
+  color: rgb(251,101,0);
+}
+
+/* Booleans (and None) */
+.hljs[class*="language-python"] .hljs-literal {
+  color: rgb(180, 94, 164);
+}
+
+/* String */
+.hljs[class*="language-python"] .hljs-string,
+.hljs[class*="language-python"] .hljs-regexp,
+.hljs[class*="language-python"] .hljs-addition,
+.hljs[class*="language-python"] .hljs-attribute {
+  color: rgb(83,160,83);
+}
+
+/* Substring (like {stuff} in an f-string) */
+.hljs[class*="language-python"] .hljs-deletion,
+.hljs[class*="language-python"] .hljs-subst {
+  color: rgb(224, 108, 117)
+}
+
+/* Name of a class */
+.hljs[class*="language-python"] .hljs-title.class_ {
+  color: rgb(239,142,216);
+}
+
+/* @decorator */
+.hljs[class*="language-python"] .hljs-meta {
+  color:rgb(208, 80, 144);
+}
+
+
+
+/* Other */
+.hljs[class*="language-python"] .hljs-emphasis {
+  font-style: italic
+}
+.hljs[class*="language-python"] .hljs-strong {
+  font-weight: bold
+}
+.hljs[class*="language-python"] .hljs-link {
+  text-decoration: underline
+}
+
+
+
+
+
+
+.hljs[class*="language-sql"] {
+  background: rgb(228, 241, 255);
+}
+
+code.hljs[class*="language-sql"]:hover{
+  /* background-color: rgb(222, 228, 241); */
+  background-color: rgb(224, 238, 254);
+}
+
+/* SELECT, FROM, WHERE, if, for */
+.hljs[class*="language-sql"] .hljs-keyword {
+  color: rgb(124,77,255);
+}
+
+/* String */
+.hljs[class*="language-sql"] .hljs-string,
+.hljs[class*="language-sql"] .hljs-regexp,
+.hljs[class*="language-sql"] .hljs-addition,
+.hljs[class*="language-sql"] .hljs-attribute {
+  color: rgb(83,160,83);
+}
+
+/* Comments */
+.hljs[class*="language-sql"] .hljs-comment,
+.hljs[class*="language-sql"] .hljs-quote {
+  color: rgb(169,169,170);
+  font-style: italic
+}
+
+/* Built-in functions e.g. print(), len(), str() etc. */
+.hljs[class*="language-sql"] .hljs-built_in {
+  color: rgb(176, 116, 4);
+}
+
+/* = + - * ** // % == != >= <= */
+.hljs[class*="language-sql"] .hljs-operator {
+  color: #F92672;
+}
+
+/* brackets, commas, semicolons */
+.hljs[class*="language-sql"] .hljs-punctuation {
+  color: #220190;
+}
+
+/* Booleans (and None) */
+.hljs[class*="language-sql"] .hljs-literal {
+  color: rgb(180, 94, 164);
+}
+
+/* INT, VARCHAR, float */
+.hljs[class*="language-sql"] .hljs-type {
+  color: rgb(180, 94, 164);
+}
+
+/* Numbers */
+.hljs[class*="language-sql"] .hljs-number {
+  color: rgb(251,101,0);
+}
+
+/* @var $var */
+.hljs[class*="language-sql"] .hljs-variable {
+  color: rgb(24, 160, 112);
+}
+
+
+
+.code-wrapper {
+  position: relative;
+  /*border: 1px solid red;*/
+}
+
+.code-wrapper pre {
+  margin: 0;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.code-wrapper:hover .copy-btn {
+  opacity: 1;
+}
+
+.copy-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: #888;
+}
+
+.copy-btn:hover svg {
+  stroke: #000000;
+}
